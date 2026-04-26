@@ -1,0 +1,42 @@
+{{ define "main" }}
+<article class="home">
+  <header class="home-header">
+    <h1>{{ site.Title }}</h1>
+    {{ with site.Params.description }}
+      <p class="home-description">{{ . }}</p>
+    {{ end }}
+  </header>
+
+  <section class="home-sections">
+    {{- range site.Menus.main }}
+      {{- if ne .URL "/" }}
+        <div class="home-section">
+          <h2><a href="{{ .URL }}">{{ .Name }}</a></h2>
+          {{- with .Post -}}
+            <p>{{ . }}</p>
+          {{- end -}}
+        </div>
+      {{- end }}
+    {{- end }}
+  </section>
+
+  {{- /* Latest blog posts */}}
+  {{- $blogSection := site.GetPage "/blog" }}
+  {{- if $blogSection }}
+    <section class="home-posts">
+      <h2>{{ i18n "latest_posts" }}</h2>
+      {{- range first 5 (where site.RegularPages "Section" "blog") }}
+        <article class="post-preview">
+          <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (i18n "date_format_long") }}</time>
+          {{- with .Description }}
+            <p>{{ . }}</p>
+          {{- end }}
+        </article>
+      {{- else }}
+        <p class="no-posts">{{ i18n "no_posts" }}</p>
+      {{- end }}
+    </section>
+  {{- end }}
+</article>
+{{ end }}

@@ -1,0 +1,27 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a href="{{ site.Home.RelPermalink }}" class="site-logo">{{ site.Title }}</a>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      {{- $currentPage := . -}}
+      {{- range site.Menus.main }}
+        {{- $isActive := or (eq $currentPage.RelPermalink .URL) (and (ne .URL "/") (hasPrefix $currentPage.RelPermalink .URL)) }}
+        <a href="{{ .URL }}" class="nav-link{{ if $isActive }} nav-link--active{{ end }}">{{ .Name }}</a>
+      {{- end }}
+    </nav>
+
+    {{- if hugo.IsMultilingual }}
+      <div class="lang-switcher">
+        {{- range $.Site.Home.AllTranslations }}
+          <a href="{{ .RelPermalink }}" class="lang-link{{ if eq $.Site.Language .Language }} lang-link--active{{ end }}" title="{{ .Language.LanguageName }}" aria-label="{{ i18n "language_switcher" }}: {{ .Language.LanguageName }}">
+            {{- .Language.LanguageName -}}
+          </a>
+        {{- end }}
+      </div>
+    {{- end }}
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="theme-toggle__icon">&#9790;</span>
+    </button>
+  </div>
+</header>

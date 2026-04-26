@@ -1,0 +1,36 @@
+# English UI strings for the FonsClarus theme
+
+# Content
+[latest_posts]
+  other = "Latest Posts"
+
+[no_posts]
+  other = "No posts yet."
+
+[read_more]
+  other = "Read more"
+
+[toc]
+  other = "Table of Contents"
+
+[tags_label]
+  other = "Tags:"
+
+[posted_on]
+  other = "Posted on"
+
+[powered_by]
+  other = "Powered by"
+
+[copyright]
+  other = "All rights reserved."
+
+[language_switcher]
+  other = "Switch language"
+
+# Date formats (used by Hugo's time.Format)
+[date_format_long]
+  other = "January 2, 2006"
+
+[date_format_short]
+  other = "Jan 2"

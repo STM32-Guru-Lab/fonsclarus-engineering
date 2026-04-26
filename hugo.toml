@@ -1,0 +1,91 @@
+baseURL = 'https://stm32-guru-lab.github.io/fonsclarus-engineering/'
+title = 'FonsClarus Engineering'
+theme = 'fonsclarus'
+
+defaultContentLanguage = 'de'
+defaultContentLanguageInSubdir = false
+
+# Code highlighting
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    lineNos = false
+    noClasses = false
+    tabWidth = 4
+
+# Taxonomies
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+
+# German — default language
+[languages.de]
+  languageCode = 'de-DE'
+  languageName = 'Deutsch'
+  weight = 1
+
+[languages.de.menu]
+  [[languages.de.menu.main]]
+    name = 'Home'
+    url = '/'
+    weight = 1
+
+  [[languages.de.menu.main]]
+    name = 'Blog'
+    url = '/blog'
+    weight = 2
+
+  [[languages.de.menu.main]]
+    name = 'Projekte'
+    url = '/projects'
+    weight = 3
+
+  [[languages.de.menu.main]]
+    name = 'Über mich'
+    url = '/about'
+    weight = 4
+
+[languages.de.params]
+  description = 'Embedded Systems, Firmware und Software Engineering — von der Theorie zur Produktion.'
+
+# English
+[languages.en]
+  languageCode = 'en-US'
+  languageName = 'English'
+  weight = 2
+  contentDir = 'content/en'
+
+[languages.en.menu]
+  [[languages.en.menu.main]]
+    name = 'Home'
+    url = '/en'
+    weight = 1
+
+  [[languages.en.menu.main]]
+    name = 'Blog'
+    url = '/en/blog'
+    weight = 2
+
+  [[languages.en.menu.main]]
+    name = 'Projects'
+    url = '/en/projects'
+    weight = 3
+
+  [[languages.en.menu.main]]
+    name = 'About'
+    url = '/en/about'
+    weight = 4
+
+[languages.en.params]
+  description = 'Embedded systems, firmware, and software engineering — from theory to production.'
+
+# Social links (shown in footer, same for all languages)
+[params]
+  [params.social]
+    [params.social.github]
+      name = 'GitHub'
+      url = 'https://github.com/fonsclarus'
+    [params.social.youtube]
+      name = 'YouTube'
+      url = 'https://youtube.com/@fonsclarus'

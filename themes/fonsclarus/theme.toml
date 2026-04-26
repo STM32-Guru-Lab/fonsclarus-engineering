@@ -1,0 +1,11 @@
+name = "FonsClarus"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "A minimal, lightweight Hugo theme for technical engineering blogs focused on embedded systems and software engineering."
+homepage = "https://github.com/fonsclarus/engineering"
+tags = ["engineering", "embedded", "minimal", "technical", "blog", "clean"]
+features = ["code highlighting", "dark mode", "table of contents", "copy button"]
+min_version = "0.112.0"
+
+[author]
+  name = "FonsClarus Engineering"

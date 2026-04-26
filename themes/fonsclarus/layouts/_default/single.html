@@ -1,0 +1,42 @@
+{{ define "main" }}
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title }}</h1>
+
+    <div class="post-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (i18n "date_format_long") }}</time>
+      {{- with .Params.tags }}
+        <span class="post-tags">
+          {{- range . }}
+            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="post-tag">{{ . }}</a>
+          {{- end }}
+        </span>
+      {{- end }}
+    </div>
+  </header>
+
+  {{- /* Table of Contents */}}
+  {{- if and (not .Params.disableToc) (gt (len .TableOfContents) 32) }}
+    <aside class="post-toc">
+      <details open>
+        <summary class="post-toc__title">{{ i18n "toc" }}</summary>
+        {{ .TableOfContents }}
+      </details>
+    </aside>
+  {{- end }}
+
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+
+  {{- /* Bottom tags */}}
+  {{- with .Params.tags }}
+    <footer class="post-footer">
+      <span class="post-tags-label">{{ i18n "tags_label" }}</span>
+      {{- range . }}
+        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="post-tag">{{ . }}</a>
+      {{- end }}
+    </footer>
+  {{- end }}
+</article>
+{{ end }}
