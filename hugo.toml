@@ -85,7 +85,7 @@ defaultContentLanguageInSubdir = false
   [params.social]
     [params.social.github]
       name = 'GitHub'
-      url = 'https://github.com/fonsclarus'
+      url = 'https://github.com/STM32-Guru-Lab'
     [params.social.youtube]
       name = 'YouTube'
-      url = 'https://youtube.com/@fonsclarus'
+      url = 'https://www.youtube.com/@STM32-Guru'
