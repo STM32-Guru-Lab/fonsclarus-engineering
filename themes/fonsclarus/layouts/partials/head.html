@@ -35,4 +35,7 @@
   {{ with (resources.Get "css/main.css") | toCSS | minify | fingerprint }}
     <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
   {{ end }}
+
+  {{- /* KaTeX — LaTeX math rendering */}}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
 </head>
