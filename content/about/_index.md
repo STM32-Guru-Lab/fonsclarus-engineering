@@ -1,22 +1,19 @@
 +++
-title = 'About'
-description = 'About FonsClarus Engineering'
+title = 'Über uns'
+description = 'Über FonsClarus Engineering — Blog und YouTube-Kanal rund um Embedded Systems, STM32 und ARM-Cortex-M.'
 +++
 
-FonsClarus Engineering is a technical blog focused on embedded systems, firmware development, and software engineering.
+FonsClarus Engineering ist ein technischer Blog, der parallel zum YouTube-Kanal betrieben wird. Ziel ist die sachliche und fundierte Vermittlung von vertieftem Wissen im Bereich eingebetteter Systeme — mit Fokus auf die Mikrocontroller der Firma STMicroelectronics (STM32) sowie die ARM-Cortex-M-Architektur.
 
-## What We Cover
+## Inhalt
 
-- **Embedded Systems**: STM32, ARM Cortex-M, bare-metal programming, RTOS
-- **Firmware**: Drivers, bootloaders, communication protocols, power management
-- **Software Engineering**: Design patterns, testing, CI/CD for embedded, code quality
-- **Tools**: GCC, CMake, Docker, OpenOCD, GDB, logic analyzers
+- **STM32 & ARM Cortex-M**: Registernahe Programmierung, HAL/CMSIS, Start-up-Code, Linker-Scripte, Peripherie-Treiber
+- **Firmware-Engineering**: Bare-Metal-Implementierungen, Zustandsmaschinen, Kommunikationsprotokolle (SPI, I²C, UART, CAN), Debugging mit OpenOCD/GDB
+- **Toolchain & Workflow**: GCC/Binutils, CMake, Docker, CI/CD für Embedded-Projekte, Versionsverwaltung
+- **Messtechnik & Verifikation**: Oszilloskop-Messungen, Logikanalysator, Performance-Analyse (Taktzyklen, Latenzen)
 
-## Philosophy
+Die Beiträge richten sich an Entwickler, die nicht nur funktionierenden Code, sondern auch ein tiefes Verständnis der zugrundeliegenden Hardware und der ARM-Cortex-M-Architektur anstreben. Alle Ergebnisse — sofern nicht anders angegeben — basieren auf eigenen Messungen und reproduzierbaren Testaufbauten.
 
-We believe in:
+## Zum YouTube-Kanal
 
-1. **Understanding the hardware** — abstractions are useful but should never replace understanding
-2. **Clean code matters in firmware too** — maintainability is not optional
-3. **Test early, test often** — hardware adds complexity that software-only projects don't have
-4. **Share knowledge** — the embedded community grows stronger when we share real-world experience
+Der Blog dient als ergänzende Plattform zum YouTube-Kanal. Während dort Konzepte visuell und im zeitlichen Ablauf dargestellt werden, bietet der Blog die Möglichkeit, Themen in schriftlicher Form präzise auszuarbeiten, mit Quellcode, Tabellen und Messdaten zu hinterlegen und langfristig referenzierbar zu machen.

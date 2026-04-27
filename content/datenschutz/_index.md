@@ -5,75 +5,93 @@ date: 2026-04-26T00:00:00+02:00
 draft: false
 ---
 
-## 1. Datenschutz auf einen Blick
+## 1. Verantwortliche Stelle
 
-### Allgemeine Hinweise
+Pavel Pys  
+Ortskamp 3  
+30539 Hannover  
 
-Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.
-
-### Datenerfassung auf dieser Website
-
-**Wer ist verantwortlich für die Datenerfassung auf dieser Website?**
-
-Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem [Impressum](/impressum/) dieser Website entnehmen.
-
-**Wie erfassen wir Ihre Daten?**
-
-Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben.
-
-Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website betreten.
-
-**Wofür nutzen wir Ihre Daten?**
-
-Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.
-
-**Welche Rechte haben Sie bezüglich Ihrer Daten?**
-
-Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten.
+E-Mail: stm@fonsclarus.eu
 
 ## 2. Hosting
 
-Diese Website wird bei [Hosting-Anbieter] gehostet. Der Anbieter ist [Name, Adresse des Hosting-Anbieters].
+Diese Website wird bei der **ALL-INK.COM – Neue Medien Münnich** betrieben.
 
-## 3. Allgemeine Hinweise und Pflichtinformationen
+ALL-INK.COM – Neue Medien Münnich  
+Inhaber: René Münnich  
+Hauptstraße 68  
+02742 Friedersdorf  
 
-### Datenschutz
+Website: [all-ink.com](https://www.all-ink.com)
 
-Der Betreiber dieser Seite nimmt den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.
+Der Hoster verarbeitet personenbezogene Daten (IP-Adresse, Zeitpunkt des Zugriffs, Browsertyp, Betriebssystem, Referrer-URL) in Server-Log-Dateien. Dies ist technisch erforderlich, um die Website auszuliefern. Die Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und störungsfreien Betrieb).
 
-### Hinweis zur verantwortlichen Stelle
+Es besteht ein Auftragsverarbeitungsvertrag (AVV) mit dem Hoster.
 
-Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
+## 3. Datenerfassung auf dieser Website
 
-[Vorname Nachname]  
-[Straße Hausnummer]  
-[PLZ Ort]  
+### Kein Kontaktformular, keine Newsletter, keine Cookies
 
-E-Mail: [E-Mail-Adresse]
+Diese Website verwendet **keine** Tracking-Cookies, keine Analyse-Dienste (wie Google Analytics), kein Kontaktformular, keinen Newsletter und keine Social-Media-Embeddings. Es werden keine Daten zu Werbezwecken erhoben oder an Dritte weitergegeben.
 
-### Speicherdauer
-
-Sofern nicht spezifisch angegeben, speichern wir personenbezogene Daten nur so lange, wie dies zur Erfüllung der verarbeitenden Zwecke notwendig ist.
-
-## 4. Datenerfassung auf dieser Website
-
-### Cookies
-
-Diese Website verwendet keine Tracking-Cookies von Drittanbietern. Technisch notwendige Cookies (z. B. für den Dark-Mode) können lokal im Browser gespeichert werden.
+Der Dark-Mode wird lokal im Browser des Besuchers gespeichert (localStorage). Diese Information wird nicht an den Server übermittelt.
 
 ### Server-Log-Dateien
 
-Der Hosting-Provider erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch übermittelt. Dies sind:
+Der Hoster erhebt und speichert automatisch Informationen in Server-Log-Dateien, die der Browser beim Seitenaufruf übermittelt:
 
-- Browsertyp und Browserversion
-- Verwendetes Betriebssystem
-- Referrer URL
-- Hostname des zugreifenden Rechners
-- Uhrzeit der Serveranfrage
 - IP-Adresse
+- Datum und Uhrzeit der Anfrage
+- aufgerufene Seite (URL)
+- Browsertyp und -version
+- verwendetes Betriebssystem
+- Referrer-URL (zuvor besuchte Seite)
+- übertragene Datenmenge
+- HTTP-Statuscode
 
-Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen.
+Diese Daten werden nicht mit anderen Datenquellen zusammengeführt. Die Speicherung dient der Sicherstellung eines störungsfreien Betriebs und der Missbrauchserkennung. Die Log-Daten werden nach 7 Tagen gelöscht.
 
-## 5. Aktualität und Änderung dieser Datenschutzerklärung
+## 4. Kommentarfunktion (Giscus)
 
-Diese Datenschutzerklärung ist aktuell gültig und hat den Stand April 2026. Durch die Weiterentwicklung unserer Website oder aufgrund geänderter gesetzlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern.
+Auf dieser Website besteht die Möglichkeit, Blog-Beiträge über **Giscus** zu kommentieren. Giscus ist ein Dienst von GitHub, Inc., der auf GitHub Discussions basiert.
+
+Wenn Sie einen Kommentar verfassen, werden folgende Daten an GitHub übermittelt:
+
+- Ihr GitHub-Benutzername
+- der von Ihnen verfasste Kommentartext
+- die zugehörige GitHub-Discussion-ID
+
+Giscus lädt zudem JavaScript-Code von GitHub-Servern nach. Dabei wird Ihre IP-Adresse an GitHub übermittelt. Weitere Informationen finden Sie in der Datenschutzerklärung von GitHub: [docs.github.com/privacy](https://docs.github.com/privacy)
+
+Die Nutzung von Giscus erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer nutzerfreundlichen Kommentarfunktion ohne zusätzliches Benutzerkonto). Kommentare werden dauerhaft auf GitHub gespeichert und können von Ihnen jederzeit über Ihr GitHub-Konto gelöscht werden.
+
+## 5. Externe Links
+
+Diese Website enthält Links zu externen Diensten, darunter:
+
+- **GitHub** ([github.com](https://github.com)) — Quellcode und Repository-Verweise
+- **YouTube** ([youtube.com](https://youtube.com)) — Videoverweise
+
+Beim Anklicken eines externen Links verlassen Sie den Verantwortungsbereich dieser Website. Für die Datenverarbeitung auf den verlinkten Seiten ist der jeweilige Betreiber verantwortlich.
+
+## 6. CDN (Content Delivery Network)
+
+Zur Darstellung von mathematischen Formeln wird die Bibliothek **KaTeX** über ein Content Delivery Network (CDN) von Cloudflare eingebunden. Dabei wird die IP-Adresse des Besuchers an den CDN-Anbieter übermittelt. Der Dienst wird ausschließlich zur Bereitstellung der Schriftarten und Skripte genutzt; es erfolgt kein Tracking.
+
+Anbieter: Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA. Datenschutzerklärung: [cloudflare.com/privacy](https://www.cloudflare.com/privacy)
+
+## 7. Ihre Rechte
+
+Sie haben jederzeit das Recht:
+
+- Auskunft über die von uns verarbeiteten personenbezogenen Daten zu erhalten (Art. 15 DSGVO)
+- die Berichtigung unrichtiger Daten zu verlangen (Art. 16 DSGVO)
+- die Löschung Ihrer Daten zu verlangen (Art. 17 DSGVO)
+- die Einschränkung der Verarbeitung zu verlangen (Art. 18 DSGVO)
+- der Verarbeitung zu widersprechen (Art. 21 DSGVO)
+- Ihre Daten in einem strukturierten, gängigen Format zu erhalten (Art. 20 DSGVO)
+- sich bei einer Aufsichtsbehörde zu beschweren (Art. 77 DSGVO)
+
+## 8. Änderungen
+
+Diese Datenschutzerklärung hat den Stand April 2026. Änderungen bleiben vorbehalten, etwa bei rechtlichen Neuerungen oder technischen Anpassungen der Website.

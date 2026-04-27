@@ -42,7 +42,7 @@ defaultContentLanguageInSubdir = false
     weight = 3
 
   [[languages.de.menu.main]]
-    name = 'Über mich'
+    name = 'Über uns'
     url = '/about'
     weight = 4
 
@@ -73,7 +73,7 @@ defaultContentLanguageInSubdir = false
     weight = 3
 
   [[languages.en.menu.main]]
-    name = 'About'
+    name = 'About Us'
     url = '/en/about'
     weight = 4
 

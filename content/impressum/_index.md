@@ -9,20 +9,19 @@ draft: false
 
 **Betreiber dieser Website:**
 
-[Vorname Nachname]  
-[Straße Hausnummer]  
-[PLZ Ort]
+Pavel Pys
+Ortskamp 3
+30539 Hannover
 
 ## Kontakt
 
-**E-Mail:** [E-Mail-Adresse]  
-**Telefon:** [Telefonnummer] (optional)
+**E-Mail:** stm@fonsclarus.eu
 
 ## Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
 
-[Vorname Nachname]  
-[Straße Hausnummer]  
-[PLZ Ort]
+Pavel Pys
+Ortskamp 3
+30539 Hannover
 
 ## Haftungsausschluss
 
