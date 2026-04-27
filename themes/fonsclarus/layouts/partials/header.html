@@ -5,8 +5,15 @@
     <nav class="site-nav" aria-label="Main navigation">
       {{- $currentPage := . -}}
       {{- range site.Menus.main }}
-        {{- $isActive := or (eq $currentPage.RelPermalink .URL) (and (ne .URL "/") (hasPrefix $currentPage.RelPermalink .URL)) }}
-        <a href="{{ .URL }}" class="nav-link{{ if $isActive }} nav-link--active{{ end }}">{{ .Name }}</a>
+        {{- $menuPage := site.GetPage .URL }}
+        {{- $menuURL := "" }}
+        {{- if $menuPage }}
+          {{- $menuURL = $menuPage.RelPermalink }}
+        {{- else }}
+          {{- $menuURL = .URL }}
+        {{- end }}
+        {{- $isActive := or (eq $currentPage.RelPermalink $menuURL) (and (ne .URL "/") (hasPrefix $currentPage.RelPermalink $menuURL)) }}
+        <a href="{{ $menuURL }}" class="nav-link{{ if $isActive }} nav-link--active{{ end }}">{{ .Name }}</a>
       {{- end }}
     </nav>
 

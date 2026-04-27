@@ -17,10 +17,11 @@
       </div>
     {{- end }}
 
+    {{- $defaultSite := index site.Sites 0 }}
     <nav class="footer-legal" aria-label="Legal pages">
-      <a href="{{ (site.GetPage "/impressum").RelPermalink }}">Impressum</a>
+      <a href="{{ ($defaultSite.GetPage "/impressum").RelPermalink }}">Impressum</a>
       <span class="footer-legal-sep" aria-hidden="true">·</span>
-      <a href="{{ (site.GetPage "/datenschutz").RelPermalink }}">Datenschutz</a>
+      <a href="{{ ($defaultSite.GetPage "/datenschutz").RelPermalink }}">Datenschutz</a>
     </nav>
 
     <p class="footer-copyright">&copy; {{ now.Year }} {{ site.Title }}.</p>
