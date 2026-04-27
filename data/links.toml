@@ -1,0 +1,14 @@
+[[link]]
+title = "STMicroelectronics"
+url = "https://www.st.com"
+description = "Offizielle Herstellerseite für STM32-Mikrocontroller, Tools und Dokumentation"
+
+[[link]]
+title = "RM0008 — STM32F103 Reference Manual"
+url = "https://www.st.com/resource/en/reference_manual/rm0008-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"
+description = "Referenzhandbuch zur STM32F103xx-Familie: Register, Peripherie, Systemarchitektur"
+
+[[link]]
+title = "DS5319 — STM32F103 Datasheet"
+url = "https://www.st.com/resource/en/datasheet/stm32f103c8.pdf"
+description = "Datenblatt STM32F103C8/CB: Elektrische Daten, Pinbelegung, Spezifikationen"

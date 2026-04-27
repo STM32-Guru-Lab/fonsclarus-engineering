@@ -7,18 +7,20 @@
     {{ end }}
   </header>
 
-  <section class="home-sections">
-    {{- range site.Menus.main }}
-      {{- if ne .URL "/" }}
-        <div class="home-section">
-          <h2><a href="{{ .URL }}">{{ .Name }}</a></h2>
-          {{- with .Post -}}
-            <p>{{ . }}</p>
-          {{- end -}}
-        </div>
-      {{- end }}
-    {{- end }}
-  </section>
+  {{- /* Resource links */}}
+  {{- with site.Data.links }}
+    <section class="home-resources">
+      <h2>{{ i18n "resources" }}</h2>
+      <ul class="resource-links">
+        {{- range .link }}
+          <li>
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .title }}</a>
+            {{- with .description }}<p>{{ . }}</p>{{ end }}
+          </li>
+        {{- end }}
+      </ul>
+    </section>
+  {{- end }}
 
   {{- /* Latest blog posts */}}
   {{- $blogSection := site.GetPage "/blog" }}

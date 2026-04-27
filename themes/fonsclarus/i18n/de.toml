@@ -28,6 +28,9 @@
 [language_switcher]
   other = "Sprache wechseln"
 
+[resources]
+  other = "Ressourcen"
+
 # Date formats (used by Hugo's time.Format)
 [date_format_long]
   other = "2. January 2006"

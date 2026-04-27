@@ -884,16 +884,37 @@ details.post-toc summary {
   line-height: 1.6;
 }
 
-.home-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.home-resources {
   margin-bottom: 3rem;
 }
 
-.home-section h2 {
+.home-resources h2 {
   font-size: 1.25rem;
   font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.375rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.resource-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.resource-links li a {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.resource-links li p {
+  margin: 0.15rem 0 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
 }
 
 .home-posts {
