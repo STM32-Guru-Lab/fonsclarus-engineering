@@ -27,8 +27,9 @@
               </span>
             {{- end }}
           </div>
-          {{- with .Description }}
-            <p class="post-preview__desc">{{ . }}</p>
+          {{- with .Summary }}
+            <p class="post-preview__desc">{{ . | plainify }}</p>
+            <a href="{{ $.RelPermalink }}" class="read-more">{{ i18n "read_more" }}</a>
           {{- end }}
         </article>
       {{- end }}

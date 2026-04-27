@@ -11,6 +11,8 @@ Doch in der Praxis stellt sich eine viel wichtigere Frage: **Wie viel CPU-Zeit b
 
 Dieser Beitrag quantifiziert diesen Freiraum anhand eines reproduzierbaren Beispiels — eines einfachen GPIO-Toggles auf dem STM32F103 bei 8 MHz HSI-Takt. Die Oszilloskop-Messungen zeigen nicht nur die erreichbaren Frequenzen, sondern vor allem die minimalen CPU-Zyklen, die für einen einzigen Zustandswechsel investiert werden müssen. Daraus lässt sich ableiten, wie viele Zyklen bei einer vorgegebenen Signalfrequenz für Verarbeitungslogik übrig bleiben.
 
+<!--more-->
+
 > ⚠️ **Hinweis:** Diese Betrachtung gilt für softwaregetriebenes GPIO-Toggling in einer `while(1)`-Schleife. Für präzise Signalerzeugung sind Timer, PWM oder DMA die bessere Lösung. Der Benchmark zeigt nicht, wie man ein perfektes 200-kHz-Signal erzeugt, sondern wie viel CPU-Budget unterschiedliche Implementierungen im reinen Toggle-Vorgang verbrauchen.
 
 ## Testaufbau

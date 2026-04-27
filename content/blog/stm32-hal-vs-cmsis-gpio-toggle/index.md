@@ -9,6 +9,8 @@ HAL (Hardware Abstraction Layer) und CMSIS (Cortex Microcontroller Software Inte
 
 Dieser Beitrag quantifiziert den Unterschied anhand eines reproduzierbaren Tests: Ein einzelner GPIO-Pin wird in einer Endlosschleife getoggelt, und die resultierende Signalfrequenz wird mit einem Oszilloskop gemessen. Alle Ergebnisse basieren auf direkten Oszilloskopmessungen und nicht auf theoretischen Abschätzungen.
 
+<!--more-->
+
 ## Testaufbau
 
 Für die Messung kommen zwei Boards zum Einsatz:
