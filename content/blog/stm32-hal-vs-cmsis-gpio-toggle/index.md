@@ -7,9 +7,9 @@ tags = ['stm32', 'gpio', 'hal', 'cmsis', 'performance', 'embedded', 'c']
 
 HAL (Hardware Abstraction Layer) und CMSIS (Cortex Microcontroller Software Interface Standard) sind die beiden dominierenden Abstraktionsebenen in der STM32-Entwicklung. Während HAL auf maximale Portabilität und einfache Bedienbarkeit ausgelegt ist, erlaubt CMSIS direkten Registerzugriff mit minimalem Overhead.
 
-Dieser Beitrag quantifiziert den Unterschied anhand eines reproduzierbaren Tests: Ein einzelner GPIO-Pin wird in einer Endlosschleife getoggelt, und die resultierende Signalfrequenz wird mit einem Oszilloskop gemessen. Alle Ergebnisse basieren auf direkten Oszilloskopmessungen und nicht auf theoretischen Abschätzungen.
-
 <!--more-->
+
+Dieser Beitrag quantifiziert den Unterschied anhand eines reproduzierbaren Tests: Ein einzelner GPIO-Pin wird in einer Endlosschleife getoggelt, und die resultierende Signalfrequenz wird mit einem Oszilloskop gemessen. Alle Ergebnisse basieren auf direkten Oszilloskopmessungen und nicht auf theoretischen Abschätzungen.
 
 ## Testaufbau
 
