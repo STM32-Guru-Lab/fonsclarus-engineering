@@ -5,8 +5,10 @@ theme = 'fonsclarus'
 defaultContentLanguage = 'de'
 defaultContentLanguageInSubdir = false
 
-# Code highlighting
+# Goldmark — allow raw HTML in Markdown (needed for <br>, <details>, etc.)
 [markup]
+  [markup.goldmark.renderer]
+    unsafe = true
   [markup.highlight]
     codeFences = true
     guessSyntax = false

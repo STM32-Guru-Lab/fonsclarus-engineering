@@ -149,7 +149,9 @@ Für das tiefere Verständnis von STM32-Systemen ist die Auseinandersetzung mit 
 
 ## Ausblick
 
-Im folgenden Beitrag wird untersucht, welchen Einfluss die GPIO-Output-Speed-Einstellung (`OSPEEDR`) auf die Signalqualität hat — insbesondere auf Flankensteilheit, Überschwingen und EMV-Verhalten. Dieser Parameter wird häufig missverstanden oder mit der Toggle-Frequenz verwechselt.
+Im [folgenden Beitrag]({{< ref "/blog/stm32-gpio-cpu-headroom" >}}) wird der Perspektivwechsel vollzogen: Nicht die maximale Toggle-Frequenz, sondern die nach dem Pin-Umschalten verbleibende CPU-Zeit steht im Fokus. Es wird gezeigt, warum BSRR gegenüber HAL die CPU-Auslastung bei einer gegebenen Signalfrequenz drastisch reduziert und wie viel Rechenleistung für die eigentliche Anwendung übrig bleibt.
+
+In einem weiteren Beitrag wird anschließend der Einfluss der GPIO-Output-Speed-Konfiguration (MODE-Bits in den CRL/CRH-Registern) auf die Signalqualität untersucht — Flankensteilheit, Überschwingen und EMV-Verhalten.
 
 ## Video
 
