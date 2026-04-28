@@ -111,7 +111,59 @@ while (1) {
 
 > **Hinweis zur `do_some_work`-Schleife:** Die `for(volatile uint32_t i = 0; i < n; ++i)`-Schleife erzeugt nicht nur `n` NOPs. Jeder Durchlauf bringt zusätzlichen Overhead mit sich: Laden und Speichern der Zählvariablen, Vergleich und bedingter Sprung. Der Parameter `n` ist daher kein direkter Zykluswert — die tatsächliche Verzögerung muss gemessen werden und hängt von der Compiler-Optimierung ab.
 
-Mit HAL hingegen würde bereits `N = 2` die 200-kHz-Marke unterschreiten. Das Experiment zeigt eindrucksvoll: **BSRR reduziert die Fixkosten des Pin-Umschaltens deutlich. Dadurch bleibt bei gleicher Ziel-Frequenz mehr CPU-Zeit für weitere Operationen.**
+Das Experiment zeigt eindrucksvoll: **BSRR reduziert die Fixkosten des Pin-Umschaltens deutlich. Dadurch bleibt bei gleicher Ziel-Frequenz mehr CPU-Zeit für weitere Operationen.**
+
+Die folgenden Oszilloskop-Aufnahmen zeigen, wie HAL und ODR-XOR mit steigender NOP-Last einbrechen:
+
+**HAL — `do_some_work(N)`:**
+| N | Frequenz |
+|:--|:---------|
+| 0 | 160,0 kHz |
+| 5 |  49,5 kHz |
+| 10|  29,4 kHz |
+| 20|  16,3 kHz |
+
+![HAL N=0 — 160 kHz](HAL_NOPS_0.jpg)
+
+*N=0: Bereits der leere Funktionsaufruf kostet Zyklen. Die Frequenz liegt bei 160 kHz — deutlich unter den theoretisch möglichen 200 kHz.*
+
+![HAL N=5 — 49,5 kHz](HAL_NOPS_5.jpg)
+
+*N=5: Sobald die Schleife fünf Durchläufe absolviert, bricht die Frequenz auf unter 50 kHz ein. Die Toggle-Zeit ist nun massiv von der Arbeitslast bestimmt.*
+
+![HAL N=10 — 29,4 kHz](HAL_NOPS_10.jpg)
+
+*N=10: Die Periodendauer wächst weiter. Der HAL-Overhead macht nur noch einen kleinen Teil der Gesamtzeit aus.*
+
+![HAL N=20 — 16,3 kHz](HAL_NOPS_20.jpg)
+
+*N=20: Die CPU ist fast ausschließlich mit der `do_some_work`-Schleife beschäftigt. Die Toggle-Frequenz spiegelt die reine Rechenleistung wider.*
+
+**ODR-XOR — `do_some_work(N)`:**
+| N | Frequenz |
+|:--|:---------|
+| 0 | 266,7 kHz |
+| 5 |  56,4 kHz |
+| 10|  31,9 kHz |
+| 20|  17,0 kHz |
+
+![ODR N=0 — 267 kHz](ODR_NOPS_0.jpg)
+
+*N=0: Der direkte Registerzugriff zahlt sich aus — 267 kHz ohne Last, fast das Doppelte von HAL.*
+
+![ODR N=5 — 56,4 kHz](ODR_NOPS_5.jpg)
+
+*N=5: Auch ODR verliert dramatisch an Frequenz, sobald die Schleife Arbeit verrichtet. Der Vorsprung gegenüber HAL ist aber noch deutlich sichtbar.*
+
+![ODR N=10 — 31,9 kHz](ODR_NOPS_10.jpg)
+
+*N=10: Die Kurven von HAL und ODR nähern sich an. Der Arbeitsanteil dominiert zunehmend.*
+
+![ODR N=20 — 17,0 kHz](ODR_NOPS_20.jpg)
+
+*N=20: Bei maximaler Last sind HAL und ODR nahezu gleich schnell — der Engpass ist die CPU, nicht die Toggle-Methode.*
+
+Bereits bei N=0 (reiner Funktionsaufruf ohne innere NOPs) fällt HAL von 200 kHz auf 160 kHz — der Aufruf-Overhead der `do_some_work`-Schleife kostet Zyklen. Bei N=5 liegt HAL unter 50 kHz. Zum Vergleich: BSRR erreicht ohne Last 1,6 MHz — wie viel bei N=5 übrig bleibt, wird in einer ergänzenden Messung gezeigt.
 
 ## Atomizität: Der stille Vorteil
 
