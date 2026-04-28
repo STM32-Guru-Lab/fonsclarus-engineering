@@ -31,9 +31,9 @@
         <article class="post-preview">
           <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
           <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format (i18n "date_format_long") }}</time>
-          {{- with .Summary }}
-            <p>{{ . | plainify }}</p>
-            <a href="{{ $.RelPermalink }}" class="read-more">{{ i18n "read_more" }}</a>
+          {{- if .Summary }}
+            <p>{{ .Summary | plainify }}</p>
+            <a href="{{ .RelPermalink }}" class="read-more">{{ i18n "read_more" }}</a>
           {{- end }}
         </article>
       {{- else }}

@@ -22,14 +22,14 @@
             {{- with .Params.tags }}
               <span class="post-tags">
                 {{- range . }}
-                  <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="post-tag">{{ . }}</a>
+                  <a href="{{ site.BaseURL }}tags/{{ . | urlize }}" class="post-tag">{{ . }}</a>
                 {{- end }}
               </span>
             {{- end }}
           </div>
-          {{- with .Summary }}
-            <p class="post-preview__desc">{{ . | plainify }}</p>
-            <a href="{{ $.RelPermalink }}" class="read-more">{{ i18n "read_more" }}</a>
+          {{- if .Summary }}
+            <p class="post-preview__desc">{{ .Summary | plainify }}</p>
+            <a href="{{ .RelPermalink }}" class="read-more">{{ i18n "read_more" }}</a>
           {{- end }}
         </article>
       {{- end }}

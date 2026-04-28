@@ -8,7 +8,7 @@
       {{- with .Params.tags }}
         <span class="post-tags">
           {{- range . }}
-            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="post-tag">{{ . }}</a>
+            <a href="{{ site.BaseURL }}tags/{{ . | urlize }}" class="post-tag">{{ . }}</a>
           {{- end }}
         </span>
       {{- end }}
@@ -34,7 +34,7 @@
     <footer class="post-footer">
       <span class="post-tags-label">{{ i18n "tags_label" }}</span>
       {{- range . }}
-        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="post-tag">{{ . }}</a>
+        <a href="{{ site.BaseURL }}tags/{{ . | urlize }}" class="post-tag">{{ . }}</a>
       {{- end }}
     </footer>
   {{- end }}
