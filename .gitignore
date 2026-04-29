@@ -10,3 +10,7 @@
 # OS files
 .DS_Store
 Thumbs.db
+
+# Working documents (plans, drafts)
+/plans/
+/content/drafts/
