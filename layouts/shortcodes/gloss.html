@@ -1,0 +1,24 @@
+{{- /* gloss shortcode — hybrid: data file lookup + inline fallback
+     Usage:
+       {{< gloss "GPIO" >}}               → lookup in data/glossary.toml
+       {{< gloss "GPIO" "Alt.Text" >}}    → lookup, show "Alt.Text" as label
+       {{< gloss "GPIO" "" "Inline" >}}   → inline definition, no data lookup
+*/ -}}
+{{- $term := .Get 0 -}}
+{{- $label := .Get 1 | default $term -}}
+{{- $inline := .Get 2 -}}
+{{- $definition := "" -}}
+
+{{- if $inline -}}
+  {{- $definition = $inline -}}
+{{- else -}}
+  {{- with index hugo.Data.glossary $term -}}
+    {{- $definition = .definition -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $definition -}}
+<span class="glossary-term" data-term="{{ $term }}" title="{{ $definition }}">{{ $label }}</span>
+{{- else -}}
+<span class="glossary-term glossary-term--missing" title="Definition fehlt: {{ $term }}">{{ $label }}</span>
+{{- end -}}

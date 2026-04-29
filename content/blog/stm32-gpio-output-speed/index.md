@@ -5,11 +5,11 @@ description = 'Die GPIO-Output-Speed-Einstellung (MODE-Bits in den CRL/CRH-Regis
 tags = ['stm32', 'gpio', 'output-speed', 'signal-integrity', 'emc', 'embedded', 'performance']
 +++
 
-Die ersten beiden Teile dieser Serie haben gezeigt, wie viel CPU-Zeit verschiedene Toggle-Methoden verbrauchen ([HAL vs CMSIS]({{< ref "/blog/stm32-hal-vs-cmsis-gpio-toggle" >}})) und warum BSRR mehr Reserve für die Anwendung lässt ([CPU-Headroom]({{< ref "/blog/stm32-gpio-cpu-headroom" >}})).
+Die ersten beiden Teile dieser Serie haben gezeigt, wie viel CPU-Zeit verschiedene Toggle-Methoden verbrauchen ([{{< gloss "HAL" >}} vs CMSIS]({{< ref "/blog/stm32-hal-vs-cmsis-gpio-toggle" >}})) und warum {{< gloss "BSRR" >}} mehr Reserve für die Anwendung lässt ([CPU-Headroom]({{< ref "/blog/stm32-gpio-cpu-headroom" >}})).
 
 Dabei ging es immer um die **Software-Seite**: Welche Instruktionen erzeugt der Compiler? Wie viele Zyklen kostet ein Funktionsaufruf?
 
-Jetzt richten wir den Blick auf die **Hardware-Seite**: Die MODE-Bits in den CRL/CRH-Registern legen fest, mit welcher Flankensteilheit der GPIO-Pin seinen Zustand ändert. Eine Einstellung, die oft mit der maximalen Toggle-Frequenz verwechselt wird — zu Unrecht, wie die Messung zeigt.
+Jetzt richten wir den Blick auf die **Hardware-Seite**: Die {{< gloss "MODE-Bits" >}} in den {{< gloss "CRL" >}}/{{< gloss "CRH" >}}-Registern legen fest, mit welcher Flankensteilheit der {{< gloss "GPIO" >}}-Pin seinen Zustand ändert. Eine Einstellung, die oft mit der maximalen Toggle-Frequenz verwechselt wird — zu Unrecht, wie die Messung zeigt.
 
 <!--more-->
 
@@ -19,10 +19,10 @@ Der Aufbau ist identisch zu den vorherigen Beiträgen:
 
 | Board | Mikrocontroller | Takt |
 |-------|----------------|------|
-| Nucleo-F103RB | STM32F103RB | 8 MHz (HSI) |
+| Nucleo-F103RB | STM32F103RB | 8 MHz ({{< gloss "HSI" >}}) |
 | Bluepill | STM32F103C6T | 8 MHz (HSI) |
 
-Getestet werden alle drei Toggle-Methoden (HAL, ODR-XOR, BSRR) jeweils mit den drei Output-Speed-Einstellungen, die der STM32F103 über die MODE-Bits in den CRL/CRH-Registern bietet:
+Getestet werden alle drei Toggle-Methoden (HAL, {{< gloss "ODR" >}}-XOR, BSRR) jeweils mit den drei Output-Speed-Einstellungen, die der STM32F103 über die MODE-Bits in den CRL/CRH-Registern bietet:
 
 | Bezeichnung | MODE-Bits | Datenblatt-Angabe | Typische Wirkung |
 |-------------|-----------|-------------------|------------------|
@@ -61,10 +61,10 @@ Wenn die Frequenz gleich bleibt — was ändert sich dann? Die **Flankenform**.
 
 Die MODE-Bits steuern, wie schnell der Ausgangstreiber zwischen High- und Low-Pegel wechselt. Eine höhere Einstellung bedeutet:
 
-* **Steilere Anstiegs- und Abfallzeiten** (slew rate)
+* **Steilere Anstiegs- und Abfallzeiten** ({{< gloss "Slew Rate" >}})
 * **Höherer transienter Strom** beim Schalten
-* **Stärkere Überschwinger** (overshoot) an den Flanken
-* **Mehr hochfrequente Anteile im Spektrum** → höhere EMV-Abstrahlung
+* **Stärkere Überschwinger** ({{< gloss "Overshoot" >}}) an den Flanken
+* **Mehr hochfrequente Anteile im Spektrum** → höhere {{< gloss "EMV" >}}-Abstrahlung
 
 Das ist auf dem Oszilloskop deutlich sichtbar:
 
@@ -72,7 +72,7 @@ Das ist auf dem Oszilloskop deutlich sichtbar:
 
 **Medium Speed:** Steilere Flanken. Kleine Überschwinger werden sichtbar — der Pin erreicht kurz einen höheren Spannungspegel als die Versorgungsspannung, bevor er sich stabilisiert.
 
-**High Speed:** Sehr steile Flanken mit deutlichen Überschwingern. Je nach Leitungslänge und Abschluss können die Überschwinger mehrere hundert Millivolt betragen und sogar zu Ringing (Einschwingen) führen.
+**High Speed:** Sehr steile Flanken mit deutlichen Überschwingern. Je nach Leitungslänge und Abschluss können die Überschwinger mehrere hundert Millivolt betragen und sogar zu {{< gloss "Ringing" >}} (Einschwingen) führen.
 
 > **Wichtig:** Bei gleicher Output-Speed-Einstellung nutzt jede Methode denselben Ausgangstreiber. Einzelne Flanken haben daher grundsätzlich denselben Treibercharakter. Unterschiede im Oszilloskopbild können dennoch entstehen, weil HAL (~200 kHz), ODR-XOR (~445 kHz) und BSRR (~1,6 MHz) unterschiedliche Wiederholfrequenzen erzeugen und das Signal dadurch unterschiedlich viel Zeit zum Einschwingen hat.
 
@@ -99,7 +99,7 @@ Die folgenden Oszilloskop-Aufnahmen zeigen den Effekt der Output-Speed-Einstellu
 **BSRR bei 72 MHz (Systemtakt) — High Speed:**
 
 ![BSRR — 72 MHz, High Speed](BSRR_72MHz_High_Beispiel.jpg)
-*Erhöht man den Systemtakt auf 72 MHz (PLL), folgen die Flanken schneller aufeinander. Dadurch bleibt weniger Zeit, bis das Signal nach Überschwingen und Ringing wieder vollständig eingeschwungen ist. Im Oszilloskopbild wirken Überschwinger und Nachschwingen deshalb deutlich dominanter.*
+*Erhöht man den Systemtakt auf 72 MHz ({{< gloss "PLL" >}}), folgen die Flanken schneller aufeinander. Dadurch bleibt weniger Zeit, bis das Signal nach Überschwingen und Ringing wieder vollständig eingeschwungen ist. Im Oszilloskopbild wirken Überschwinger und Nachschwingen deshalb deutlich dominanter.*
 
 ## Wann welche Einstellung sinnvoll ist
 

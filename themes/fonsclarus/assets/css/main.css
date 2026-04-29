@@ -1103,3 +1103,25 @@ details.post-toc summary {
     right: 0.25rem;
   }
 }
+
+/* --------------------------------------------------------------------------
+   a. Glossary Term — Hover definitions via native `title` tooltip
+   -------------------------------------------------------------------------- */
+
+.glossary-term {
+  cursor: help;
+  color: var(--color-accent);
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+
+.glossary-term:hover {
+  color: var(--color-accent-hover);
+}
+
+/* Fehlerfall: Begriff ohne Definition */
+.glossary-term--missing {
+  color: var(--color-text);
+  text-decoration: underline wavy #cc4444;
+}
