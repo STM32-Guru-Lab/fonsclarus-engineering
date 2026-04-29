@@ -190,7 +190,7 @@ Die Beschäftigung mit den unterschiedlichen Abstraktionsebenen ist kein Selbstz
 
 ## Ausblick
 
-Im folgenden Beitrag untersuchen wir den Einfluss der GPIO-Output-Speed-Konfiguration (MODE-Bits in den CRL/CRH-Registern) auf die Signalqualität — Flankensteilheit, Überschwingen und EMV-Verhalten. Dieser Parameter wird oft mit der Toggle-Frequenz verwechselt, hat aber unmittelbare Auswirkungen auf die Signalintegrität.
+Im [folgenden Beitrag]({{< ref "/blog/stm32-gpio-output-speed" >}}) untersuchen wir den Einfluss der GPIO-Output-Speed-Konfiguration (MODE-Bits in den CRL/CRH-Registern) auf die Signalqualität — Flankensteilheit, Überschwingen und EMV-Verhalten. Dieser Parameter wird oft mit der Toggle-Frequenz verwechselt, hat aber unmittelbare Auswirkungen auf die Signalintegrität.
 
 ## Video & Quellen
 
