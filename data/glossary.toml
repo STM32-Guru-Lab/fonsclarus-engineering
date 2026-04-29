@@ -1,0 +1,76 @@
+# Glossary of technical terms for hover tooltips
+# Usage in markdown: {{< gloss "TERM" >}}
+# Terms are case-sensitive — use exact key as shown here.
+# Section headers with spaces/hyphens MUST be quoted: ["term name"]
+
+[GPIO]
+label = "GPIO"
+definition = "General Purpose Input/Output — Ein programmierbarer Pin des Mikrocontrollers, der entweder als Ein- oder Ausgang konfiguriert werden kann."
+
+[BSRR]
+label = "BSRR"
+definition = "Bit Set/Reset Register — Ein Peripherie-Register des STM32, mit dem einzelne GPIO-Pins atomar (in einem einzigen Taktzyklus) gesetzt oder zurückgesetzt werden können, ohne dass ein Read-Modify-Write nötig ist."
+
+[ODR]
+label = "ODR"
+definition = "Output Data Register — Das Ausgabedatenregister eines GPIO-Ports. Ein Schreibzugriff setzt alle Pins des Ports gleichzeitig — allerdings nicht atomar, da ein Read-Modify-Write stattfindet."
+
+[IDR]
+label = "IDR"
+definition = "Input Data Register — Das Eingabedatenregister eines GPIO-Ports. Über dieses Register wird der aktuelle Pegel der Eingangspins ausgelesen."
+
+[CRL]
+label = "CRL"
+definition = "Configuration Register Low — Steuert die Konfiguration der GPIO-Pins 0–7 eines Ports, inklusive Input/Output-Modus und Output-Speed (MODE-Bits). Siehe RM0008, Kapitel 9.2."
+
+[CRH]
+label = "CRH"
+definition = "Configuration Register High — Steuert die Konfiguration der GPIO-Pins 8–15 eines Ports, analog zum CRL-Register. Siehe RM0008, Kapitel 9.2."
+
+[HAL]
+label = "HAL"
+definition = "Hardware Abstraction Layer — Die von STMicroelectronics bereitgestellte Abstraktionsschicht für die STM32-Familie. Ermöglicht plattformunabhängigen Zugriff auf Peripherie, erzeugt aber Code-Overhead durch viele Funktionsaufrufe."
+
+[CMSIS]
+label = "CMSIS"
+definition = "Cortex Microcontroller Software Interface Standard — Ein vendorunabhängiger Hardware-Abstraktions-Standard von ARM für Cortex-M-basierte Mikrocontroller. Stellt Registerdefinitionen und intrinsische Funktionen bereit."
+
+[SRAM]
+label = "SRAM"
+definition = "Static Random Access Memory — Der interne Arbeitsspeicher des Mikrocontrollers. Wird für Variablen, Stack und Heap genutzt. Beim STM32F103 stehen zwischen 6 und 20 KB zur Verfügung, je nach Variante."
+
+[ISR]
+label = "ISR"
+definition = "Interrupt Service Routine — Eine spezielle Funktion, die automatisch aufgerufen wird, wenn ein bestimmtes Interrupt-Ereignis (z. B. Timer-Überlauf, Pin-Zustandsänderung) eintritt."
+
+[EMV]
+label = "EMV"
+definition = "Elektromagnetische Verträglichkeit — Die Fähigkeit eines Geräts, in seiner elektromagnetischen Umgebung störungsfrei zu arbeiten, ohne andere Geräte übermäßig zu beeinflussen."
+
+["MODE-Bits"]
+label = "MODE-Bits"
+definition = "Die zwei Konfigurationsbits (MODE[1:0]) in den CRL/CRH-Registern eines GPIO-Pins. Legen fest, ob der Pin als Eingang (00) oder als Ausgang mit bestimmter Flankensteilheit (01=10 MHz, 10=2 MHz, 11=50 MHz) arbeitet."
+
+["Slew Rate"]
+label = "Slew Rate"
+definition = "Flankensteilheit — Die Änderungsrate der Spannung pro Zeiteinheit (V/µs oder V/ns). Eine hohe Slew Rate bedeutet steilere Flanken, aber auch mehr Überschwinger und höhere EMV-Abstrahlung."
+
+[Overshoot]
+label = "Overshoot"
+definition = "Überschwinger — Ein kurzzeitiges Überschreiten des Ziel-Spannungspegels nach einer Flanke. Tritt bei zu steilen Flanken auf und kann benachbarte Signale beeinflussen (Crosstalk)."
+
+[Ringing]
+label = "Ringing"
+definition = "Einschwingen / Nachschwingen — Gedämpfte Oszillation des Signals nach einer Flanke, verursacht durch Leitungsinduktivitäten und parasitäre Kapazitäten. Besonders ausgeprägt bei hoher Slew Rate."
+
+[PLL]
+label = "PLL"
+definition = "Phase-Locked Loop — Ein Taktgenerator, der aus einem Referenztakt (z. B. 8 MHz HSI) einen höheren Systemtakt (z. B. 72 MHz) erzeugt. Der STM32F103 nutzt die PLL, um den maximalen Takt zu erreichen."
+
+[HSI]
+label = "HSI"
+definition = "High-Speed Internal Oscillator — Der interne RC-Oszillator des STM32 mit 8 MHz. Dient als Standard-Taktquelle nach dem Reset, ist aber weniger genau als ein externer Quarz."
+
+[HSE]
+label = "HSE"
+definition = "High-Speed External Oscillator — Ein externer Quarzoszillator (z. B. 8 MHz auf dem Nucleo-Board), der als präzise Taktquelle für die PLL und den Systemtakt dient."
