@@ -41,5 +41,8 @@
 [search_close]
   other = "Schließen"
 
+[search_fallback]
+  other = "Pagefind-Suche wird geladen …"
+
 [date_format_short]
   other = "2. Jan"

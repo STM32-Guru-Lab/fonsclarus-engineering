@@ -17,10 +17,6 @@
       {{- end }}
     </nav>
 
-    <button class="search-toggle" id="search-toggle" aria-label="{{ i18n "search" | default "Suche" }}" title="{{ i18n "search" | default "Suche" }}">
-      <span class="search-toggle__icon">&#128269;</span>
-    </button>
-
     {{- if hugo.IsMultilingual }}
       <div class="lang-switcher">
         {{- range $.Site.Home.AllTranslations }}
@@ -31,8 +27,13 @@
       </div>
     {{- end }}
 
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-      <span class="theme-toggle__icon">&#9790;</span>
-    </button>
+    <div class="header-actions">
+      <button class="search-toggle" id="search-toggle" aria-label="{{ i18n "search" | default "Suche" }}" title="{{ i18n "search" | default "Suche" }}">
+        <span class="search-toggle__icon">&#128269;</span>
+      </button>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-toggle__icon">&#9790;</span>
+      </button>
+    </div>
   </div>
 </header>

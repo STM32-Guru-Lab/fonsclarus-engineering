@@ -7,7 +7,8 @@
       <h2 class="search-modal__title">{{ i18n "search" | default "Suche" }}</h2>
       <button class="search-modal__close" id="search-close" aria-label="{{ i18n "search_close" | default "Schließen" }}">&times;</button>
     </div>
-    <div id="search-widget"></div>
+    <div id="search-widget">
+      <p class="search-fallback">{{ i18n "search_fallback" | default "Search wird geladen …" }}</p>
+    </div>
   </div>
 </div>
-<script src="/pagefind/pagefind-ui.js" defer></script>

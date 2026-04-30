@@ -238,6 +238,16 @@ main {
   font-size: 0.8125rem;
 }
 
+/* --------------------------------------------------------------------------
+   7c. Header Actions (Search + Theme Toggle)
+   -------------------------------------------------------------------------- */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
 .lang-link {
   display: inline-block;
   padding: 0.2rem 0.35rem;
@@ -1232,6 +1242,14 @@ details.post-toc summary {
 
 #search-widget {
   padding: 0.75rem 1.25rem 1.25rem;
+}
+
+.search-fallback {
+  margin: 0;
+  padding: 2rem 0;
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
 }
 
 /* Pagefind UI Overrides — light/dark via CSS variables */
