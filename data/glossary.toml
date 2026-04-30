@@ -74,3 +74,51 @@ definition = "High-Speed Internal Oscillator — Der interne RC-Oszillator des S
 [HSE]
 label = "HSE"
 definition = "High-Speed External Oscillator — Ein externer Quarzoszillator (z. B. 8 MHz auf dem Nucleo-Board), der als präzise Taktquelle für die PLL und den Systemtakt dient."
+
+["Read-Modify-Write"]
+label = "Read-Modify-Write (RMW)"
+definition = "Ein Lese-Ändere-Schreibe-Zugriff auf ein Register. Die CPU liest den aktuellen Wert (LDR), manipuliert ihn (XOR/AND/OR) und schreibt das Ergebnis zurück (STR). Diese Sequenz ist nicht atomar — ein Interrupt zwischen LDR und STR kann zu Race Conditions führen. Der ODR-XOR-Zugriff ist ein typisches Beispiel: `GPIOB->ODR ^= GPIO_ODR_ODR8` wird zu LDR → EOR → STR."
+
+[Inlining]
+label = "Inlining"
+definition = "Eine Compiler-Optimierung, bei der der Funktionskörper direkt an der Aufrufstelle eingefügt wird, statt einen BL (Branch-and-Link)-Aufruf zu erzeugen. Spart Aufruf-Overhead, vergrößert aber den Code. GCC aktiviert `-finline-functions` ab `-O2`, aber ohne LTO (`-flto`) nur innerhalb derselben Übersetzungseinheit (`.c`-Datei)."
+
+[LTO]
+label = "LTO"
+definition = "Link-Time Optimization — Eine Compiler-Optimierung (`-flto`), die über Übersetzungseinheiten hinweg arbeitet. Erlaubt Inlining und Konstantenweitergabe auch über `.c`-Dateigrenzen hinweg. Ohne LTO sieht der Compiler beim Übersetzen von `main.c` nicht den Code aus `stm32f1xx_hal_gpio.c` — Funktionsaufrufe wie `HAL_GPIO_TogglePin()` bleiben deshalb erhalten."
+
+["Constant Hoisting"]
+label = "Constant Hoisting"
+definition = "Eine Compiler-Optimierung, bei der konstante Werte (Adressen, Bitmasken) aus einer Schleife herausgezogen und einmal vor der Schleife in Registern bereitgestellt werden. Spart Lade-Instruktionen pro Iteration. Beispiel BSRR bei `-O2`: `mov.w r1, #256` und `mov.w r2, #16777216` werden vor die `while(1)`-Schleife gezogen."
+
+["Literal Pool"]
+label = "Literal Pool"
+definition = "Ein Speicherbereich im Code-Segment (Flash), in dem der ARM-Compiler Konstanten wie Adressen oder große Zahlenwerte ablegt. Der Zugriff erfolgt über PC-relatives Laden mit `ldr r3, [pc, #offset]`. Auf dem STM32 im Thumb-Modus sind Literal Pools oft nach langen Sprungtabellen oder am Ende von Funktionen zu finden."
+
+["Alternate Function"]
+label = "Alternate Function"
+definition = "Ein GPIO-Pin-Modus des STM32, bei dem der Pin nicht von Software (GPIO-Ausgang), sondern von einer Peripherie-Einheit (SPI, UART, Timer) gesteuert wird. Konfiguriert über die MODE-Bits und CNF-Bits in den CRL/CRH-Registern. Siehe RM0008, Kapitel 9.2."
+
+[Crosstalk]
+label = "Crosstalk"
+definition = "Übersprechen — Unerwünschte kapazitive oder induktive Kopplung zwischen benachbarten Signalleitungen. Eine steile Spannungsflanke auf einer Leitung kann durch parasitäre Kapazitäten einen Spannungsimpuls auf der Nachbarleitung induzieren. Besonders kritisch bei hoher Slew Rate und langen, parallelen Leiterbahnen."
+
+["Race Condition"]
+label = "Race Condition"
+definition = "Wettlaufsituation — Ein unerwarteter Systemzustand, der entsteht, wenn zwei oder mehr Codepfade (z. B. Hauptschleife und ISR) gleichzeitig auf denselben Speicherbereich zugreifen und das Ergebnis von der zeitlichen Reihenfolge der Zugriffe abhängt. Der ODR-Read-Modify-Write-Zugriff ist anfällig: Unterbricht ein Interrupt zwischen LDR und STR, geht die Änderung verloren."
+
+["Critical Section"]
+label = "Critical Section"
+definition = "Ein Codeabschnitt, der nicht von Interrupts unterbrochen werden darf, weil er auf gemeinsame Ressourcen (z. B. ein ODR-Register oder globale Variablen) zugreift. Geschützt durch Deaktivieren und Reaktivieren von Interrupts (`cpsid i` / `cpsie i`). BSRR-Zugriffe sind inhärent atomar und benötigen keine Critical Sections."
+
+[PWM]
+label = "PWM"
+definition = "Pulse Width Modulation — Ein Verfahren zur Erzeugung eines digitalen Signals mit variabler Pulsbreite bei fester Frequenz, typischerweise über einen Hardware-Timer. Das Tastverhältnis (Duty Cycle) bestimmt die effektive Spannung oder Leistung. Wird für Motoransteuerung, LED-Dimmung und Signalgenerierung eingesetzt."
+
+[DMA]
+label = "DMA"
+definition = "Direct Memory Access — Ein Peripherie-Modul des Mikrocontrollers, das Daten zwischen Peripherie (z. B. SPI, ADC, USART) und Speicher transferieren kann, ohne die CPU zu belasten. Ermöglicht parallele Datenbewegung im Hintergrund und reduziert die CPU-Auslastung bei datenintensiven Anwendungen auf ein Minimum."
+
+[NOP]
+label = "NOP"
+definition = "No Operation — Eine CPU-Instruktion, die keinen Effekt hat außer einen Taktzyklus zu verbrauchen. In ARM-Thumb als `mov r8, r8` oder `nop` codiert. Wird für präzise Timing-Verzögerungen, als Platzhalter im Assembler oder zum Auffüllen von Pipeline-Stufen verwendet."

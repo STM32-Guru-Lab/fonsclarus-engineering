@@ -105,14 +105,14 @@ Die folgenden Oszilloskop-Aufnahmen zeigen den Effekt der Output-Speed-Einstellu
 
 Die Wahl der Output Speed ist ein Optimierungsproblem zwischen Signalqualität und EMV.
 
-> **Wichtig für den STM32F103:** Die MODE-Bits in den CRL/CRH-Registern gelten sowohl für **GPIO-Ausgänge** (softwaregetoggelt) als auch für **Alternate-Function-Ausgänge** (peripheriegetrieben wie SPI-SCK, UART-TX, Timer-PWM). In beiden Fällen steuern dieselben Bits die Flankensteilheit. Die folgende Tabelle bezieht sich auf **reine GPIO-Ausgänge**, wie sie in dieser Serie softwaregetoggelt werden. Für Alternate Functions gelten andere Kriterien, die hier nicht Gegenstand sind.
+> **Wichtig für den STM32F103:** Die MODE-Bits in den CRL/CRH-Registern gelten sowohl für **GPIO-Ausgänge** (softwaregetoggelt) als auch für **{{< gloss "Alternate Function" >}}-Ausgänge** (peripheriegetrieben wie SPI-SCK, UART-TX, Timer-{{< gloss "PWM" >}}). In beiden Fällen steuern dieselben Bits die Flankensteilheit. Die folgende Tabelle bezieht sich auf **reine GPIO-Ausgänge**, wie sie in dieser Serie softwaregetoggelt werden. Für Alternate Functions gelten andere Kriterien, die hier nicht Gegenstand sind.
 
 | Anwendung | Empfohlene Speed | Begründung |
 |-----------|-----------------|------------|
 | LED-Ansteuerung, Statusanzeigen | **Low** | Flanke irrelevant, minimale EMV |
 | Langsame Logiksignale (Relais, Optokoppler) | **Low** | Keine hohen Anforderungen |
 | Bitbanging (< 100 kHz) | **Low–Medium** | Ausreichend, solange die Flanke im Toleranzfenster liegt |
-| Software-PWM (> 1 kHz) | **Medium** | Saubere Flanken ohne übermäßige EMV |
+| Software-{{< gloss "PWM" >}} (> 1 kHz) | **Medium** | Saubere Flanken ohne übermäßige EMV |
 | Timer-basierte Signale (HF) | **Medium–High** | Je nach gewünschter Flankensteilheit |
 
 ### Praxistipp: Gezielt konfigurieren, nicht global
@@ -120,7 +120,7 @@ Die Wahl der Output Speed ist ein Optimierungsproblem zwischen Signalqualität u
 Ein häufiger Fehler in CubeMX-Projekten: Alle GPIO-Pins werden auf High Speed gestellt, "weil es ja nicht schaden kann". Das tut es doch:
 
 * Jeder Pin mit High Speed wird zu einer potenziellen Störquelle
-* Die Überschwinger können benachbarte Pins kapazitiv beeinflussen (Crosstalk)
+* Die Überschwinger können benachbarte Pins kapazitiv beeinflussen ({{< gloss "Crosstalk" >}})
 * In EMV-geprüften Produkten können zu steile Flanken den Grenzwert überschreiten
 
 **Faustregel:** Nur die Pins auf High Speed stellen, die es wirklich brauchen — in der Regel sind das Alternate-Function-Schnittstellen mit hohen Taktraten (SPI-SCK > 1 MHz, Timer-PWM) oder Pins, an denen eine besonders steile Flanke gefordert ist. Alle anderen Pins auf Medium oder Low belassen.

@@ -11,6 +11,9 @@
 .DS_Store
 Thumbs.db
 
+# Node.js
+node_modules/
+
 # Working documents (plans, drafts)
 /plans/
 /content/drafts/

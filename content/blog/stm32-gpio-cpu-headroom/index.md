@@ -13,7 +13,7 @@ Doch in der Praxis stellt sich eine viel wichtigere Frage: **Wie viel CPU-Zeit b
 
 Dieser Beitrag quantifiziert diesen Freiraum anhand eines reproduzierbaren Beispiels — eines einfachen {{< gloss "GPIO" >}}-Toggles auf dem STM32F103 bei 8 MHz {{< gloss "HSI" >}}-Takt. Die Oszilloskop-Messungen zeigen nicht nur die erreichbaren Frequenzen, sondern vor allem die minimalen CPU-Zyklen, die für einen einzigen Zustandswechsel investiert werden müssen. Daraus lässt sich ableiten, wie viele Zyklen bei einer vorgegebenen Signalfrequenz für Verarbeitungslogik übrig bleiben.
 
-> ⚠️ **Hinweis:** Diese Betrachtung gilt für softwaregetriebenes GPIO-Toggling in einer `while(1)`-Schleife. Für präzise Signalerzeugung sind Timer, PWM oder DMA die bessere Lösung. Der Benchmark zeigt nicht, wie man ein perfektes 200-kHz-Signal erzeugt, sondern wie viel CPU-Budget unterschiedliche Implementierungen im reinen Toggle-Vorgang verbrauchen.
+> ⚠️ **Hinweis:** Diese Betrachtung gilt für softwaregetriebenes GPIO-Toggling in einer `while(1)`-Schleife. Für präzise Signalerzeugung sind Timer, {{< gloss "PWM" >}} oder {{< gloss "DMA" >}} die bessere Lösung. Der Benchmark zeigt nicht, wie man ein perfektes 200-kHz-Signal erzeugt, sondern wie viel CPU-Budget unterschiedliche Implementierungen im reinen Toggle-Vorgang verbrauchen.
 
 ## Testaufbau
 
@@ -98,7 +98,7 @@ while (1) {
 
 Für `N = 0` erhalten wir die maximale Frequenz von 1,6 MHz. Mit steigendem `N` sinkt die Frequenz, aber selbst bei beachtlichen Werten bleibt eine hohe Ausgangsfrequenz erhalten.
 
-Um die Verzögerung präzise kontrollieren zu können, sollte man die Last **ohne Schleifen-Overhead** aufbauen — z. B. durch direkt aufgerufene `__NOP()`-Instruktionen:
+Um die Verzögerung präzise kontrollieren zu können, sollte man die Last **ohne Schleifen-Overhead** aufbauen — z. B. durch direkt aufgerufene `__NOP()`-Instruktionen ({{< gloss "NOP" >}} steht für No Operation — eine Instruktion, die einen Taktzyklus verbraucht, ohne einen Effekt zu haben):
 
 ```c
 while (1) {
@@ -167,9 +167,9 @@ Bereits bei N=0 (reiner Funktionsaufruf ohne innere NOPs) fällt HAL von 200 kHz
 
 ## Atomizität: Der stille Vorteil
 
-Neben der reinen Geschwindigkeit bringt der BSRR-Zugriff einen entscheidenden Sicherheitsgewinn: Das Setzen und Rücksetzen erfolgt über unabhängige Speicherzugriffe. Es gibt keine Read-Modify-Write-Phase, die von Interrupts unterbrochen werden könnte.
+Neben der reinen Geschwindigkeit bringt der BSRR-Zugriff einen entscheidenden Sicherheitsgewinn: Das Setzen und Rücksetzen erfolgt über unabhängige Speicherzugriffe. Es gibt keine {{< gloss "Read-Modify-Write" >}}-Phase, die von Interrupts unterbrochen werden könnte.
 
-In Systemen, in denen mehrere Codepfade denselben GPIO-Port manipulieren (z. B. eine ISR und der Hauptcode), vermeidet BSRR subtile Race Conditions ohne den Zusatzaufwand von Critical Sections.
+In Systemen, in denen mehrere Codepfade denselben GPIO-Port manipulieren (z. B. eine ISR und der Hauptcode), vermeidet BSRR subtile {{< gloss "Race Condition" >}}s ohne den Zusatzaufwand von {{< gloss "Critical Section" >}}s.
 
 Der ODR-XOR-Zugriff aus Teil 1 ist dagegen nicht atomar:
 

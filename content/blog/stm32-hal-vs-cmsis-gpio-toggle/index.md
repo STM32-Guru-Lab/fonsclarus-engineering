@@ -77,11 +77,11 @@ while (1)
 }
 ```
 
-Diese eine Zeile wird vom Compiler zu einer Read-Modify-Write-Sequenz übersetzt — bestehend aus einem Ladezugriff (LDR), einer XOR-Verknüpfung (EOR) und einem Schreibzugriff (STR). Drei Instruktionen, kein Funktionsaufruf, keine Prüfung, keine Abstraktion.
+Diese eine Zeile wird vom Compiler zu einer {{< gloss "Read-Modify-Write" >}}-Sequenz übersetzt — bestehend aus einem Ladezugriff (LDR), einer XOR-Verknüpfung (EOR) und einem Schreibzugriff (STR). Drei Instruktionen, kein Funktionsaufruf, keine Prüfung, keine Abstraktion.
 
 Hier wird der Zustand des Pins direkt über das Register verändert, ohne zusätzliche Funktionsaufrufe. Das reduziert den Overhead und führt zu einer höheren Ausführungsgeschwindigkeit.
 
-**Wichtig**: Die ODR-Read-Modify-Write-Sequenz ist **nicht atomar**. Unterbricht ein Interrupt zwischen LDR und STR und modifiziert ebenfalls ODR, so geht die Änderung durch den späteren STR des unterbrochenen Codes verloren — ein klassischer Race-Condition-Fall.
+**Wichtig**: Die ODR-{{< gloss "Read-Modify-Write" >}}-Sequenz ist **nicht atomar**. Unterbricht ein Interrupt zwischen LDR und STR und modifiziert ebenfalls ODR, so geht die Änderung durch den späteren STR des unterbrochenen Codes verloren — ein klassischer {{< gloss "Race Condition" >}}-Fall.
 
 **Gemessene Toggle-Frequenz:** 445 kHz
 **Entspricht:** ≈18 effektive CPU-Zyklen pro vollständigem Toggle-Zyklus (basierend auf Messung)
@@ -104,7 +104,7 @@ Das BSRR-Register hat die Eigenschaft, dass Schreibzugriffe auf die unteren 16 B
 
 Die Compiler-Ausgabe besteht aus lediglich zwei Store-Instruktionen (STR). Dadurch wird eine atomare Operation ermöglicht und zusätzlicher Overhead vermieden.
 
-Diese Methode ist nicht nur schneller, sondern auch robuster gegenüber konkurrierenden Zugriffen, da keine Read-Modify-Write-Sequenz vorliegt.
+Diese Methode ist nicht nur schneller, sondern auch robuster gegenüber konkurrierenden Zugriffen, da keine {{< gloss "Read-Modify-Write" >}}-Sequenz vorliegt.
 
 Die ~2,0 MHz entsprechen der Zeit zwischen zwei direkten Registerzugriffen (Set → Reset). Die effektive Toggle-Frequenz von ~1,6 MHz wird jedoch durch den Schleifen-Overhead bestimmt — also durch die Zeit, die der Prozessor benötigt, um nach dem Rücksetzen des Pins den nächsten Durchlauf der `while(1)`-Schleife zu beginnen.
 

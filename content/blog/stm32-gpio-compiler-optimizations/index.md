@@ -99,7 +99,7 @@ Der Blick auf die tatsächlich generierten ARM-Thumb-Instruktionen erklärt die 
 
 Die Funktion selbst durchläuft zusätzlich Prologue, eigentliche Toggle-Logik und Epilogue. Bei `-O0` werden lokale Zwischenergebnisse deutlich häufiger über den Stack geführt, und der erzeugte Code ist wesentlich länger. Falls `USE_FULL_ASSERT` aktiviert ist, können zusätzlich die HAL-Parameterprüfungen Code erzeugen; ohne dieses Makro ist `assert_param()` typischerweise ein leeres Makro.
 
-**Bei `-O2`:** Auch bei `-O2` wird `HAL_GPIO_TogglePin()` in dieser Messung **nicht geinlined** — die Funktion liegt in einer separaten Übersetzungseinheit (`stm32f1xx_hal_gpio.c`), und LTO (`-flto`) war nicht aktiviert. Der `bl`-Aufruf bleibt erhalten. Die Schleife selbst ist strukturell identisch zu `-O0`:
+**Bei `-O2`:** Auch bei `-O2` wird `HAL_GPIO_TogglePin()` in dieser Messung **nicht geinlined** — die Funktion liegt in einer separaten Übersetzungseinheit (`stm32f1xx_hal_gpio.c`), und {{< gloss "LTO" >}} (`-flto`) war nicht aktiviert. Der `bl`-Aufruf bleibt erhalten. Die Schleife selbst ist strukturell identisch zu `-O0`:
 
 ```text id="42x7z4"
  80001fc:   mov.w   r1, #256          @ GPIO_PIN_8
@@ -110,13 +110,13 @@ Die Funktion selbst durchläuft zusätzlich Prologue, eigentliche Toggle-Logik u
 
 Der Unterschied liegt **innerhalb** der HAL-Funktion: Bei `-O0` wird typischer Debug-Code mit Frame-Pointer und vielen Stack-Zugriffen erzeugt. Bei `-O2` ist die Registerallokation effizienter, der Funktionskörper kompakter, und unnötige Speicherzugriffe verschwinden. Deshalb steigt die Frequenz von 80 kHz auf 200 kHz, obwohl der `bl`-Aufruf in beiden Fällen sichtbar bleibt.
 
-Zusätzlicher Hinweis aus der `objdump`-Analyse: Bei `-O2` wurde `MX_GPIO_Init()` **in** `main()` geinlined — aber `HAL_GPIO_TogglePin()` aus einer anderen `.c`-Datei nicht. Das ist ein guter Hinweis darauf, dass Inlining über Übersetzungseinheiten hinweg erst mit Link-Time Optimization (`-flto`) realistisch wird.
+Zusätzlicher Hinweis aus der `objdump`-Analyse: Bei `-O2` wurde `MX_GPIO_Init()` **in** `main()` geinlined — aber `HAL_GPIO_TogglePin()` aus einer anderen `.c`-Datei nicht. Das ist ein guter Hinweis darauf, dass {{< gloss "Inlining" >}} über Übersetzungseinheiten hinweg erst mit {{< gloss "LTO" >}} (`-flto`) realistisch wird.
 
 ### 2. ODR-XOR — `GPIOB->ODR ^= GPIO_ODR_ODR8`
 
-Die ODR-Read-Modify-Write-Sequenz ist der einfachste Fall: kein Funktionsaufruf, nur Lade-, XOR- und Speicherbefehle. Trotzdem zeigen sich Unterschiede in der Registerallokation.
+Die ODR-{{< gloss "Read-Modify-Write" >}}-Sequenz ist der einfachste Fall: kein Funktionsaufruf, nur Lade-, XOR- und Speicherbefehle. Trotzdem zeigen sich Unterschiede in der Registerallokation.
 
-**Bei `-O0`:** Sechs Instruktionen pro Schleifendurchlauf. Die GPIOB-Adresse wird **zweimal** aus dem Literal-Pool geladen — einmal für den Lesezugriff (r3), einmal für den Schreibzugriff (r2):
+**Bei `-O0`:** Sechs Instruktionen pro Schleifendurchlauf. Die GPIOB-Adresse wird **zweimal** aus dem {{< gloss "Literal Pool" >}} geladen — einmal für den Lesezugriff (r3), einmal für den Schreibzugriff (r2):
 
 ```text id="eq0ih7"
  800015c:   ldr     r3, [pc, #12]     @ r3 = &GPIOB
@@ -141,7 +141,7 @@ Der Compiler erzeugt hier bewusst kaum optimierten Code. Das hilft beim Debuggin
 
 Die eingesparte Instruktion — das redundante Laden der GPIOB-Adresse — erklärt den Frequenzsprung von 307,7 kHz auf 444,4 kHz. Eine einzige überflüssige Instruktion reduziert die Toggle-Rate in dieser engen Schleife deutlich.
 
-Wichtig bleibt: ODR-XOR ist ein Read-Modify-Write-Zugriff. In einer isolierten Messschleife ist das unkritisch. In produktivem Code mit Interrupts oder parallelen Zugriffen auf denselben GPIO-Port kann BSRR robuster sein, weil Setzen und Rücksetzen einzelner Pins atomar über Schreibzugriffe erfolgen.
+Wichtig bleibt: ODR-XOR ist ein {{< gloss "Read-Modify-Write" >}}-Zugriff. In einer isolierten Messschleife ist das unkritisch. In produktivem Code mit Interrupts oder parallelen Zugriffen auf denselben GPIO-Port kann BSRR robuster sein, weil Setzen und Rücksetzen einzelner Pins atomar über Schreibzugriffe erfolgen.
 
 ### 3. BSRR — `GPIOB->BSRR = GPIO_BSRR_BS8; GPIOB->BSRR = GPIO_BSRR_BR8`
 
@@ -174,21 +174,21 @@ Der BSRR-Zugriff kommt dem idealen Minimalcode am nächsten: zwei Store-Instrukt
  800020a:   b.n     8000206           @ loop
 ```
 
-Der Unterschied könnte kaum größer sein: **8 vs. 3 Instruktionen** pro High-Low-Schleifendurchlauf. Das erklärt den Sprung von 615 kHz auf 1,6 MHz. Der Compiler hat hier mehrere Optimierungen gleichzeitig angewendet: *Constant Hoisting* (Konstanten aus der Schleife gezogen), bessere *Register Allocation* (Adresse nur einmal geladen) und das Wegfallen von Code, der für die eigentliche GPIO-Ausgabe keinen Nutzen hat.
+Der Unterschied könnte kaum größer sein: **8 vs. 3 Instruktionen** pro High-Low-Schleifendurchlauf. Das erklärt den Sprung von 615 kHz auf 1,6 MHz. Der Compiler hat hier mehrere Optimierungen gleichzeitig angewendet: *{{< gloss "Constant Hoisting" >}}* (Konstanten aus der Schleife gezogen), bessere *Register Allocation* (Adresse nur einmal geladen) und das Wegfallen von Code, der für die eigentliche GPIO-Ausgabe keinen Nutzen hat.
 
 ## Analyse: Die Stellhebel des Compilers
 
 Die `objdump`-Ausgabe macht die Mechanismen sichtbar, mit denen der Compiler die Performance beeinflusst.
 
-### Inlining
+### {{< gloss "Inlining" >}}
 
-Inlining ist einer der größten Hebel, aber mit einer wichtigen Einschränkung: GCC aktiviert `-finline-functions` bei `-O2`, `-O3` und `-Os`. Der Compiler entscheidet dabei heuristisch, welche Funktionen sich lohnen. Ohne Link-Time Optimization sieht GCC beim Kompilieren einer `.c`-Datei aber nicht automatisch den Funktionskörper aus einer anderen Übersetzungseinheit.
+{{< gloss "Inlining" >}} ist einer der größten Hebel, aber mit einer wichtigen Einschränkung: GCC aktiviert `-finline-functions` bei `-O2`, `-O3` und `-Os`. Der Compiler entscheidet dabei heuristisch, welche Funktionen sich lohnen. Ohne {{< gloss "LTO" >}} sieht GCC beim Kompilieren einer `.c`-Datei aber nicht automatisch den Funktionskörper aus einer anderen Übersetzungseinheit.
 
-Die `objdump`-Analyse bestätigt genau das: `MX_GPIO_Init()` aus `main.c` wurde bei `-O2` in `main()` geinlined, aber `HAL_GPIO_TogglePin()` aus `stm32f1xx_hal_gpio.c` nicht — es gibt keinen LTO-Build. Ohne **Link-Time Optimization** (`-flto`) bleibt der Funktionsaufruf (`BL`) erhalten.
+Die `objdump`-Analyse bestätigt genau das: `MX_GPIO_Init()` aus `main.c` wurde bei `-O2` in `main()` geinlined, aber `HAL_GPIO_TogglePin()` aus `stm32f1xx_hal_gpio.c` nicht — es gibt keinen LTO-Build. Ohne **{{< gloss "LTO" >}}** (`-flto`) bleibt der Funktionsaufruf (`BL`) erhalten.
 
-### Constant Hoisting
+### {{< gloss "Constant Hoisting" >}}
 
-Der deutlichste Unterschied zwischen `-O0` und `-O2` zeigt sich bei BSRR: Bei `-O0` werden die Konstanten (GPIOB-Adresse, 0x100, 0x1000000) bei **jedem** Schleifendurchlauf neu aus dem Literal-Pool geladen oder mit `mov.w` gesetzt. Bei `-O2` werden sie **einmal vor der Schleife** in Registern bereitgestellt — der Schleifenkörper schrumpft von 8 auf 3 Instruktionen.
+Der deutlichste Unterschied zwischen `-O0` und `-O2` zeigt sich bei BSRR: Bei `-O0` werden die Konstanten (GPIOB-Adresse, 0x100, 0x1000000) bei **jedem** Schleifendurchlauf neu aus dem {{< gloss "Literal Pool" >}} geladen oder mit `mov.w` gesetzt. Bei `-O2` werden sie **einmal vor der Schleife** in Registern bereitgestellt — der Schleifenkörper schrumpft von 8 auf 3 Instruktionen.
 
 ### Registerallokation
 

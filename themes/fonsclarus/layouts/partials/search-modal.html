@@ -1,0 +1,13 @@
+{{- /* Pagefind Search Modal */}}
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<div id="search-modal" class="search-modal" aria-hidden="true">
+  <div class="search-modal__overlay"></div>
+  <div class="search-modal__content">
+    <div class="search-modal__header">
+      <h2 class="search-modal__title">{{ i18n "search" | default "Suche" }}</h2>
+      <button class="search-modal__close" id="search-close" aria-label="{{ i18n "search_close" | default "Schließen" }}">&times;</button>
+    </div>
+    <div id="search-widget"></div>
+  </div>
+</div>
+<script src="/pagefind/pagefind-ui.js" defer></script>

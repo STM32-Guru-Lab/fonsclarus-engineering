@@ -35,5 +35,11 @@
 [date_format_long]
   other = "January 2, 2006"
 
+[search]
+  other = "Search"
+
+[search_close]
+  other = "Close"
+
 [date_format_short]
   other = "Jan 2"

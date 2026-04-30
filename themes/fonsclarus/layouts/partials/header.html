@@ -17,6 +17,10 @@
       {{- end }}
     </nav>
 
+    <button class="search-toggle" id="search-toggle" aria-label="{{ i18n "search" | default "Suche" }}" title="{{ i18n "search" | default "Suche" }}">
+      <span class="search-toggle__icon">&#128269;</span>
+    </button>
+
     {{- if hugo.IsMultilingual }}
       <div class="lang-switcher">
         {{- range $.Site.Home.AllTranslations }}

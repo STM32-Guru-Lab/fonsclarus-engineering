@@ -33,6 +33,17 @@ jobs:
       - name: Build
         run: hugo --minify
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install & run Pagefind
+        run: |
+          npm ci
+          npx pagefind --source public
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
