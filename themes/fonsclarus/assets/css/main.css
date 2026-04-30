@@ -399,6 +399,10 @@ main {
   width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .post-content th,
