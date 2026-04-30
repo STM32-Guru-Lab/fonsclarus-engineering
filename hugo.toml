@@ -82,8 +82,10 @@ defaultContentLanguageInSubdir = false
 [languages.en.params]
   description = 'Embedded systems, firmware, and software engineering — from theory to production.'
 
-# Social links (shown in footer, same for all languages)
+# Global defaults
 [params]
+  author = 'Pavel'
+
   [params.social]
     [params.social.github]
       name = 'GitHub'
