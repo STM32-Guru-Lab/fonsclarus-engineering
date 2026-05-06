@@ -7,6 +7,9 @@
   var pagefindUI = null;
   var pagefindLoaded = false;
 
+  // Base-Pfad für Pagefind-Assets (wird von Hugo als data-Attribut gesetzt)
+  var searchBase = modal ? (modal.getAttribute('data-search-base') || '/pagefind') : '/pagefind';
+
   function initPagefind() {
     if (pagefindUI) return;
     if (typeof PagefindUI === 'undefined') return;
@@ -38,7 +41,7 @@
     if (!pagefindLoaded) {
       pagefindLoaded = true;
       var script = document.createElement('script');
-      script.src = '/pagefind/pagefind-ui.js';
+      script.src = searchBase + '/pagefind-ui.js';
       script.onload = function() {
         setTimeout(initPagefind, 100);
         // Wenn nach 5s kein UI da ist, Fallback anzeigen

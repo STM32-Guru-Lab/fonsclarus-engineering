@@ -1,6 +1,8 @@
 {{- /* Pagefind Search Modal */}}
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-<div id="search-modal" class="search-modal" aria-hidden="true">
+{{- $pagefindBase := "pagefind" | relURL }}
+<link href="{{ $pagefindBase }}/pagefind-ui.css" rel="stylesheet">
+<div id="search-modal" class="search-modal" aria-hidden="true"
+     data-search-base="{{ $pagefindBase }}">
   <div class="search-modal__overlay"></div>
   <div class="search-modal__content">
     <div class="search-modal__header">
