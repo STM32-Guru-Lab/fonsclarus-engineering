@@ -122,3 +122,15 @@ definition = "Direct Memory Access — Ein Peripherie-Modul des Mikrocontrollers
 [NOP]
 label = "NOP"
 definition = "No Operation — Eine CPU-Instruktion, die keinen Effekt hat außer einen Taktzyklus zu verbrauchen. In ARM-Thumb als `mov r8, r8` oder `nop` codiert. Wird für präzise Timing-Verzögerungen, als Platzhalter im Assembler oder zum Auffüllen von Pipeline-Stufen verwendet."
+
+[FPU]
+label = "FPU"
+definition = "Floating Point Unit — Eine optionale Hardware-Einheit in Cortex-M4F-Prozessoren, die Gleitkommaoperationen (float, double) in Hardware ausführt, statt sie in Software zu emulieren. Der STM32F411RE besitzt eine FPU, der STM32F103RB nicht. Für GPIO-Toggle-Operationen ist sie irrelevant, wird aber in späteren Vergleichen (Mathematik, DSP) eine Rolle spielen."
+
+["ART Accelerator"]
+label = "ART Accelerator"
+definition = "Adaptive Real-Time Memory Accelerator — Ein Hardware-Beschleuniger in der STM32F4-Serie, der die Latenz zwischen Flash-Speicher und CPU reduziert. Er erreicht eine Ausführung mit 0 Wait States aus dem Flash, obwohl der Systemtakt (100 MHz) die maximale Flash-Zugriffszeit übersteigt. Der F103 nutzt stattdessen einen Prefetch Buffer. Siehe RM0383, Kapitel 3."
+
+["Cortex-M4"]
+label = "Cortex-M4"
+definition = "ARM Cortex-M4 — Ein 32-Bit-Prozessorkern mit 3-stufiger Pipeline, optionaler FPU und DSP-Erweiterungen. Im Vergleich zum Cortex-M3 (F103) bietet der M4 eine effizientere Pipeline, Single-Cycle-Multiplikation und Hardware-Division. Der STM32F411RE implementiert einen Cortex-M4F (mit FPU)."
