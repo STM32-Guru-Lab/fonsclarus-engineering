@@ -22,6 +22,10 @@ Der Aufbau ist identisch zu den vorherigen Beiträgen:
 | Nucleo-F103RB | STM32F103RB | 8 MHz ({{< gloss "HSI" >}}) |
 | Bluepill | STM32F103C6T | 8 MHz (HSI) |
 
+![Pinout Nucleo-F103RB — Morpho-Header CN5, CN6, CN8, CN9 mit PB8](PinoutF103Nucleo.png)
+
+Die Pinbelegung des Nucleo-F103RB ist im [UM1724](https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf) dokumentiert. Die Morpho-Header CN5, CN6, CN8 und CN9 führen alle MCU-Pins nach außen. Gemessen wird an **Pin PB8**, der auf CN5 Pin 6 (Morpho, links) liegt und über den Morpho-Header direkt zugänglich ist — kein Arduino-Header, kein Lötpad.
+
 Getestet werden alle drei Toggle-Methoden (HAL, {{< gloss "ODR" >}}-XOR, BSRR) jeweils mit den drei Output-Speed-Einstellungen, die der STM32F103 über die MODE-Bits in den CRL/CRH-Registern bietet:
 
 | Bezeichnung | MODE-Bits | Datenblatt-Angabe | Typische Wirkung |
@@ -157,6 +161,7 @@ Im nächsten Beitrag werfen wir einen Blick auf Compiler-Optimierungen — wie s
 
 ### Referenzierte Dokumente
 
+* **UM1724** — STM32 Nucleo-64 Boards User Manual (MB1136): Pinbelegung, Morpho-Header, Schaltplan. [PDF](https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf)
 * **RM0008 Rev 21** — STM32F101xx, STM32F102xx, STM32F103xx, STM32F105xx, STM32F107xx Referenzhandbuch, Kapitel 9.2 (GPIOx_CRL/CRH Register). [PDF](https://www.st.com/resource/en/reference_manual/rm0008-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf)
 * **STM32F103x8/xB Datenblatt** — I/O AC Characteristics, `fmax(IO)out`, Rise/Fall-Time. [PDF](https://www.st.com/resource/en/datasheet/stm32f103c8.pdf)
 * **AN4899** — STM32 Microcontroller GPIO Hardware Settings and Low-Power Consumption. [PDF](https://www.st.com/resource/en/application_note/an4899-stm32-microcontroller-gpio-hardware-settings-and-lowpower-consumption-stmicroelectronics.pdf)

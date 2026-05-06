@@ -12,3 +12,18 @@ description = "Referenzhandbuch zur STM32F103xx-Familie: Register, Peripherie, S
 title = "DS5319 — STM32F103 Datasheet"
 url = "https://www.st.com/resource/en/datasheet/stm32f103c8.pdf"
 description = "Datenblatt STM32F103C8/CB: Elektrische Daten, Pinbelegung, Spezifikationen"
+
+[[link]]
+title = "DS9716 — STM32F411RE Datasheet"
+url = "https://www.st.com/resource/en/datasheet/stm32f411re.pdf"
+description = "Datenblatt STM32F411xC/E: Elektrische Daten, Pinbelegung, Spezifikationen, maximale Taktraten"
+
+[[link]]
+title = "RM0383 — STM32F411 Reference Manual"
+url = "https://www.st.com/resource/en/reference_manual/rm0383-stm32f411xce-advanced-armbased-32bit-mcus-stmicroelectronics.pdf"
+description = "Referenzhandbuch zur STM32F411xC/E-Familie: Register, Peripherie, Systemarchitektur (Cortex-M4F)"
+
+[[link]]
+title = "UM1724 — STM32 Nucleo-64 Boards User Manual"
+url = "https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf"
+description = "Benutzerhandbuch für Nucleo-64-Boards (MB1136): Pinbelegung, Morpho-Header CN5/CN6/CN8/CN9, Schaltplan"
