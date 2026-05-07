@@ -38,6 +38,52 @@ Getestet werden alle drei Toggle-Methoden (HAL, {{< gloss "ODR" >}}-XOR, BSRR) j
 
 > **Anmerkung zur Nomenklatur:** Auf dem STM32F103 heißen die MODE-Bits offiziell "Output mode, max speed X MHz". Die Werte beschreiben die **spezifizierte AC-Fähigkeit des Ausgangspads unter definierten Last- und Versorgungsbedingungen** — sie geben nicht vor, wie schnell eine Software-Schleife den Pin toggeln kann. Das Datenblatt (STM32F103x8/xB, I/O AC Characteristics) bezeichnet diese Größe als `fmax(IO)out` und verknüpft sie mit Lastkapazität `CL`, Versorgungsspannung `VDD` sowie Rise/Fall-Time. Die Beschreibung der CRL/CRH-Register und der MODE-Bits findet sich im Referenzhandbuch [RM0008 Rev 21, Kapitel 9.2](https://www.st.com/resource/en/reference_manual/rm0008-stm32f101xx-stm32f102xx-stm32f103xx-stm32f105xx-and-stm32f107xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf).
 
+### Toolchain & Versionen
+
+| Komponente | Version |
+|------------|---------|
+| `arm-none-eabi-gcc` | 14.3.1 (GNU Tools for STM32 14.3.rel1.20251027) |
+| `arm-none-eabi-size` | 2.44.0.20250616 (GNU Tools for STM32) |
+| `arm-none-eabi-objdump` | 2.44.0.20250616 (GNU Tools for STM32) |
+| CMake | 3.28.3 |
+| CubeMX | 6.17.0 |
+| CubeIDE | 2.1.0 |
+| STM32CubeF1 HAL | Firmware Package V1.8.7 |
+
+### Clock-Konfiguration (NucF1_00_GPIO_Toggle)
+
+**Oszillatoren (HSI / HSE / PLL):**
+- HSI: Aktiviert (Interner 8 MHz RC-Oszillator)
+- HSE: Deaktiviert
+- PLL: Aktiviert (Quelle: HSI_DIV2 → 4 MHz, Multiplikator: ×2 → 8 MHz)
+
+**Taktraten:**
+- SYSCLK: 8 MHz (Quelle: PLLCLK)
+- AHB-Prescaler: /1 → HCLK = 8 MHz
+- APB1-Prescaler: /1 → PCLK1 = 8 MHz
+- APB2-Prescaler: /1 → PCLK2 = 8 MHz
+
+**Flash-Einstellungen:**
+- Flash-Latency (Waitstates): 0 Waitstates (`FLASH_LATENCY_0`, da Takt ≤ 24 MHz)
+- Prefetch-Buffer: Standardmäßig von der HAL bei 8 MHz deaktiviert bzw. nicht zwingend benötigt
+- ART Accelerator: Nicht relevant (STM32F1 besitzt keinen ART Accelerator)
+
+**Registerauszug (aus `Core/Src/main.c`):**
+```c
+RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI_DIV2;
+RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL2;
+
+RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0);
+```
+
 ## Die Überraschung: Output Speed ändert die Frequenz nicht
 
 Das zentrale Ergebnis in diesem Messaufbau: **Die Toggle-Frequenz bleibt über alle Speed-Einstellungen hinweg praktisch unverändert.**
