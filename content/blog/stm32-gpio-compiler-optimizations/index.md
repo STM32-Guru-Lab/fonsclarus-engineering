@@ -23,7 +23,7 @@ Der Aufbau ist identisch zu den vorherigen Beiträgen:
 | Nucleo-F103RB | STM32F103RB     | 8 MHz ({{< gloss "HSI" >}}) |
 | Bluepill      | STM32F103C6T    | 8 MHz (HSI)                 |
 
-Getestet werden alle drei Toggle-Methoden (HAL, {{< gloss "ODR" >}}-XOR, BSRR) — jeweils kompiliert mit `-O0`, `-Og`, `-O1`, `-O2` und `-Os`. Der Compiler ist `arm-none-eabi-gcc`, die Messung erfolgt wie in Teil 1–3 mit einem Oszilloskop direkt am Pin PB8.
+Getestet werden alle drei Toggle-Methoden (HAL, {{< gloss "ODR" >}}-XOR, BSRR) — jeweils kompiliert mit `-O0`, `-Og`, `-O1`, `-O2` und `-Os`. Der Compiler ist `arm-none-eabi-gcc`, die Messung erfolgt wie in Teil 1–3 mit einem Logic Analyzer direkt am Pin PB8.
 
 ## Die Optimierungsstufen
 
