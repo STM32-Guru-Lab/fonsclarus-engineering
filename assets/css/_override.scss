@@ -1,0 +1,15 @@
+/* ==========================================================================
+   _override.scss — Override LoveIt variables or structural rules
+   ========================================================================== */
+
+/* Underline links in content for readability */
+.single .content a,
+.summary .content a {
+  text-decoration: underline;
+}
+
+/* Word-wrap for code blocks to prevent overflow on mobile */
+code, pre {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}

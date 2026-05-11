@@ -1,0 +1,12 @@
+# English UI string overrides and additions for FonsClarus Engineering
+# These merge with LoveIt's built-in en.toml translations
+
+# ── Custom Homepage Keys ────────────────────────────────────
+[resources]
+  other = "Resources"
+
+[latestPosts]
+  other = "Latest Posts"
+
+[noPosts]
+  other = "No posts yet."

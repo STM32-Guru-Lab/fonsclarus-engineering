@@ -1,0 +1,16 @@
+{{- /* Override of LoveIt's internal/x.html — Hugo 0.161+ doesn't ship _internal/shortcodes/x.html */ -}}
+{{- $id := .Get 0 -}}
+{{- $user := .Get 1 -}}
+{{- if and $id $user -}}
+    {{- with $id -}}
+        {{- $url := printf "https://x.com/%v/status/%v" $user $id -}}
+        {{- partial "plugin/script.html" (dict "src" "https://platform.twitter.com/widgets.js" "defer" true) -}}
+        <blockquote class="twitter-tweet" data-dnt="true">
+            <p lang="en" dir="ltr">
+                <a href="{{ $url }}" target="_blank" rel="noopener noreferrer">{{ $url }}</a>
+            </p>
+        </blockquote>
+    {{- end -}}
+{{- else -}}
+    {{- errorf "The %q shortcode requires two positional parameters: the ID of the tweet and the user. See %s" .Name .Position -}}
+{{- end -}}

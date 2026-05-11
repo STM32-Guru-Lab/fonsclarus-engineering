@@ -1,98 +1,219 @@
 baseURL = 'https://stm32-guru-lab.github.io/fonsclarus-engineering/'
 title = 'FonsClarus Engineering'
-theme = 'fonsclarus'
-
-# Pagination for blog listing — 10 posts per page
-paginate = 10
+theme = 'LoveIt'
 
 defaultContentLanguage = 'de'
 defaultContentLanguageInSubdir = false
 
-# Goldmark — allow raw HTML in Markdown (needed for <br>, <details>, etc.)
+# Pagination
+[pagination]
+  pagerSize = 10
+  path = 'page'
+
+# Markup — Goldmark & Highlight
 [markup]
-  [markup.goldmark.renderer]
-    unsafe = true
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = true
+    [markup.goldmark.renderer]
+      unsafe = true
   [markup.highlight]
     codeFences = true
     guessSyntax = false
     lineNos = false
-    noClasses = false
-    tabWidth = 4
+    noClasses = true
+    lineNumbersInTable = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
 
 # Taxonomies
 [taxonomies]
   tag = 'tags'
   category = 'categories'
 
-# German — default language
-[languages.de]
-  languageCode = 'de-DE'
-  languageName = 'Deutsch'
-  weight = 1
-
-[languages.de.menu]
-  [[languages.de.menu.main]]
-    name = 'Home'
-    url = '/'
-    weight = 1
-
-  [[languages.de.menu.main]]
-    name = 'Blog'
-    url = '/blog'
-    weight = 2
-
-  [[languages.de.menu.main]]
-    name = 'Projekte'
-    url = '/projects'
-    weight = 3
-
-  [[languages.de.menu.main]]
-    name = 'Über uns'
-    url = '/about'
-    weight = 4
-
-[languages.de.params]
+# Global Params
+[params]
+  defaultTheme = 'auto'
+  dateFormat = '2006-01-02'
+  title = 'FonsClarus Engineering'
   description = 'Embedded Systems, Firmware und Software Engineering — von der Theorie zur Produktion.'
 
-# English
-[languages.en]
-  languageCode = 'en-US'
-  languageName = 'English'
-  weight = 2
-  contentDir = 'content/en'
+  [params.author]
+    name = 'Pavel'
+    link = ''
 
-[languages.en.menu]
-  [[languages.en.menu.main]]
-    name = 'Home'
-    url = '/en'
-    weight = 1
+  # Header
+  [params.header]
+    desktopMode = 'fixed'
+    mobileMode = 'auto'
+    [params.header.title]
+      logo = ''
+      name = 'FonsClarus Engineering'
+      pre = ''
+      post = ''
+      typeit = false
 
-  [[languages.en.menu.main]]
-    name = 'Blog'
-    url = '/en/blog'
-    weight = 2
+  # Footer
+  [params.footer]
+    enable = true
+    hugo = true
+    copyright = true
+    author = true
+    since = 2026
+    license = ''
+    custom = '<a href="/impressum">Impressum</a> | <a href="/datenschutz">Datenschutz</a>'
 
-  [[languages.en.menu.main]]
-    name = 'Projects'
-    url = '/en/projects'
-    weight = 3
+  # Section (blog listing)
+  [params.section]
+    paginate = 20
+    dateFormat = '01-02'
+    rss = 10
 
-  [[languages.en.menu.main]]
-    name = 'About Us'
-    url = '/en/about'
-    weight = 4
+  # List (taxonomy pages)
+  [params.list]
+    paginate = 20
+    dateFormat = '01-02'
+    rss = 10
 
-[languages.en.params]
-  description = 'Embedded systems, firmware, and software engineering — from theory to production.'
+  # Home page
+  [params.home]
+    rss = 10
+    [params.home.profile]
+      enable = false
+    [params.home.posts]
+      enable = true
+      paginate = 5
 
-# Global defaults
-[params]
-  author = 'Pavel'
+  # Page defaults
+  [params.page]
+    hiddenFromHomePage = false
+    hiddenFromSearch = false
+    ruby = false
+    fraction = false
+    fontawesome = false
+    linkToMarkdown = false
+    rssFullText = true
+    [params.page.toc]
+      enable = true
+      keepStatic = false
+      auto = true
+    [params.page.code]
+      copy = true
+      maxShownLines = 50
+    [params.page.share]
+      enable = false
+    # KaTeX mathematical formulas
+    [params.page.math]
+      enable = true
+      inlineLeftDelimiter = ''
+      inlineRightDelimiter = ''
+      blockLeftDelimiter = ''
+      blockRightDelimiter = ''
+      copyTex = true
+      mhchem = true
+    # Giscus comment system
+    [params.page.comment]
+      enable = true
+      [params.page.comment.giscus]
+        enable = true
+        repo = 'STM32-Guru-Lab/fonsclarus-engineering'
+        repoId = 'R_kgDOSNNCQQ'
+        category = 'Announcements'
+        categoryId = 'DIC_kwDOSNNCQc4C7yAd'
+        mapping = 'pathname'
+        lang = ''
+        reactionsEnabled = '1'
+        emitMetadata = '0'
+        inputPosition = 'bottom'
+        lazyLoading = false
+        lightTheme = 'light'
+        darkTheme = 'dark'
 
+  # Search — disabled; using Pagefind build-time indexing instead
+  [params.search]
+    enable = false
+
+  # Social
   [params.social]
-    [params.social.github]
-      name = 'GitHub'
+    [params.social.GitHub]
       url = 'https://github.com/STM32-Guru-Lab'
-    [params.social.youtube]
-      name = 'YouTube'
+      title = 'GitHub'
+      newtab = true
+    [params.social.Youtubelegacy]
       url = 'https://www.youtube.com/@STM32-Guru'
+      title = 'YouTube'
+      newtab = true
+
+  # CDN
+  [params.cdn]
+    data = 'jsdelivr.yml'
+
+  # TypeIt
+  [params.typeit]
+    speed = 100
+    cursorSpeed = 1000
+    cursorChar = '|'
+    duration = -1
+
+# ── Languages ────────────────────────────────────────────────
+[languages.de]
+  weight = 1
+  locale = 'de-DE'
+  label = 'Deutsch'
+  [languages.de.params]
+    description = 'Embedded Systems, Firmware und Software Engineering — von der Theorie zur Produktion.'
+  [[languages.de.menu.main]]
+    weight = 1
+    identifier = 'home'
+    name = 'Home'
+    url = '/'
+  [[languages.de.menu.main]]
+    weight = 2
+    identifier = 'blog'
+    name = 'Blog'
+    url = '/blog'
+  [[languages.de.menu.main]]
+    weight = 3
+    identifier = 'projects'
+    name = 'Projekte'
+    url = '/projects'
+  [[languages.de.menu.main]]
+    weight = 4
+    identifier = 'about'
+    name = 'Über uns'
+    url = '/about'
+
+[languages.en]
+  weight = 2
+  locale = 'en-US'
+  label = 'English'
+  contentDir = 'content/en'
+  [languages.en.params]
+    description = 'Embedded systems, firmware, and software engineering — from theory to production.'
+  [[languages.en.menu.main]]
+    weight = 1
+    identifier = 'home'
+    name = 'Home'
+    url = '/en/'
+  [[languages.en.menu.main]]
+    weight = 2
+    identifier = 'blog'
+    name = 'Blog'
+    url = '/en/blog/'
+  [[languages.en.menu.main]]
+    weight = 3
+    identifier = 'projects'
+    name = 'Projects'
+    url = '/en/projects/'
+  [[languages.en.menu.main]]
+    weight = 4
+    identifier = 'about'
+    name = 'About Us'
+    url = '/en/about/'

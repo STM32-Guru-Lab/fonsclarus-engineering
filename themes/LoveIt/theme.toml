@@ -1,0 +1,11 @@
+name = "LoveIt"
+license = "MIT"
+licenselink = "https://opensource.org/licenses/MIT"
+description = "A clean, elegant but advanced Hugo theme"
+homepage = "https://github.com/dillonzq/LoveIt"
+tags = ["blog", "clean", "elegant", "responsive", "dark-mode", "multilingual", "seo"]
+features = ["dark/light theme", "search", "comment systems", "math typesetting", "diagrams"]
+min_version = "0.112.0"
+
+[author]
+  name = "Dillon"

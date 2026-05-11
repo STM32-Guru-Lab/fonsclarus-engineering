@@ -1,0 +1,7 @@
+{{- /* Override of LoveIt's internal/x_simple.html — Hugo 0.161+ doesn't ship _internal/shortcodes/x_simple.html */ -}}
+{{- $pc := site.Config.Privacy.X -}}
+{{- if not $pc.Disable -}}
+    {{- with .Get 0 -}}
+        {{- partial "plugin/script.html" (dict "src" "https://platform.twitter.com/widgets.js" "defer" true) -}}
+    {{- end -}}
+{{- end -}}

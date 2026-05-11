@@ -1,9 +1,0 @@
-{{- /* Render hook: code blocks — converts ```mermaid to a Mermaid.js container */}}
-{{- if eq .Type "mermaid" }}
-  <div class="mermaid">{{ .Inner | safeHTML }}</div>
-{{- else }}
-  {{- /* Default rendering for all other languages */}}
-  <div class="code-block-wrapper">
-    <pre>{{ .Inner }}</pre>
-  </div>
-{{- end }}

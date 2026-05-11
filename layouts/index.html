@@ -1,0 +1,97 @@
+{{- define "title" }}{{ .Site.Title }}{{ end -}}
+
+{{- define "content" -}}
+    {{- $params := .Scratch.Get "params" -}}
+    <div class="page home" data-home="posts">
+        {{- /* Welcome / Intro */ -}}
+        {{- if .Content -}}
+            <div class="single">
+                <div class="content" id="content">
+                    {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+                </div>
+            </div>
+        {{- end -}}
+
+        {{- /* Resource links from data/links.toml */ -}}
+        {{- $links := .Site.Data.links.link -}}
+        {{- if $links -}}
+            <div class="home-resources">
+                <h2>{{ T "resources" }}</h2>
+                <ul class="resource-links">
+                    {{- range $links -}}
+                        <li>
+                            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .title }}</a>
+                            {{- with .description -}}
+                                <p>{{ . }}</p>
+                            {{- end -}}
+                        </li>
+                    {{- end -}}
+                </ul>
+            </div>
+        {{- end -}}
+
+        {{- /* Social Links */ -}}
+        {{- $socialMap := resources.Get "data/social.yml" | transform.Unmarshal -}}
+        {{- $socialArr := slice -}}
+        {{- range $key, $value := .Site.Params.social -}}
+            {{- $social := $key | lower | index $socialMap | default dict -}}
+            {{- with $social.Alias -}}
+                {{- $social = index $socialMap . | default dict -}}
+            {{- end -}}
+            {{- if $value -}}
+                {{- if reflect.IsMap $value -}}
+                    {{- with $value.weight -}}{{- $social = dict "Weight" . | merge $social -}}{{- end -}}
+                    {{- with $value.prefix -}}{{- $social = dict "Prefix" . | merge $social -}}{{- end -}}
+                    {{- with index $value "template" -}}{{- $social = dict "Template" . | merge $social -}}{{- end -}}
+                    {{- with $value.id -}}{{- $social = dict "Id" . | merge $social -}}{{- end -}}
+                    {{- with $value.url -}}{{- $social = dict "Url" . | merge $social -}}{{- end -}}
+                    {{- with $value.title -}}{{- $social = dict "Title" . | merge $social -}}{{- end -}}
+                    {{- with $value.newtab -}}{{- $social = dict "Newtab" . | merge $social -}}{{- end -}}
+                    {{- with $value.icon -}}{{- $social = dict "Icon" . | merge $social -}}{{- end -}}
+                    {{- with $value.rel -}}{{- $social = dict "Rel" . | merge $social -}}{{- end -}}
+                {{- else if ne $value true -}}
+                    {{- $social = dict "Id" $value | merge $social -}}
+                {{- end -}}
+                {{- if $social.Icon.Simpleicons -}}
+                    {{- $prefix := ($.Scratch.Get "cdn" | default dict).simpleIconsPrefix -}}
+                    {{- $social = dict "Prefix" $prefix | dict "Icon" | merge $social -}}
+                {{- end -}}
+                {{- $socialArr = $socialArr | append $social -}}
+            {{- end -}}
+        {{- end -}}
+        {{- if $socialArr -}}
+            <div class="home-social">
+                <div class="links">
+                    {{- range sort $socialArr "Weight" -}}
+                        {{- partial "plugin/social.html" . -}}
+                    {{- end -}}
+                </div>
+            </div>
+        {{- end -}}
+
+        {{- /* Posts */ -}}
+        {{- $posts := .Site.Params.home.posts -}}
+        {{- if ne $posts.enable false | and .Site.RegularPages -}}
+            {{- $pages := where .Site.RegularPages "Type" "posts" -}}
+            {{- if .Site.Params.page.hiddenFromHomePage -}}
+                {{- $pages = where $pages "Params.hiddenfromhomepage" false -}}
+            {{- else -}}
+                {{- $pages = where $pages "Params.hiddenfromhomepage" "!=" true -}}
+            {{- end -}}
+            {{- with $posts.paginate | default .Site.Params.paginate -}}
+                {{- $pages = $.Paginate $pages . -}}
+            {{- else -}}
+                {{- $pages = .Paginate $pages -}}
+            {{- end -}}
+            <div class="home-posts">
+                <h2>{{ T "latestPosts" }}</h2>
+                {{- range $pages.Pages -}}
+                    {{- .Render "summary" -}}
+                {{- else -}}
+                    <p class="no-posts">{{ T "noPosts" }}</p>
+                {{- end -}}
+            </div>
+            {{- partial "paginator.html" . -}}
+        {{- end -}}
+    </div>
+{{- end -}}

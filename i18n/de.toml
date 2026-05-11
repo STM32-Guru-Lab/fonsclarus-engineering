@@ -1,0 +1,12 @@
+# German UI string overrides and additions for FonsClarus Engineering
+# These merge with LoveIt's built-in de.toml translations
+
+# ── Custom Homepage Keys ────────────────────────────────────
+[resources]
+  other = "Ressourcen"
+
+[latestPosts]
+  other = "Neueste Beiträge"
+
+[noPosts]
+  other = "Noch keine Beiträge."
