@@ -62,18 +62,31 @@ Die zentrale Frage dieses Leitfadens: **Welche der drei Methoden soll ich in mei
 ### 2.1 Entscheidungsbaum
 
 ```mermaid
-graph TD
-    A["GPIO-Toggle benötigt"] --> B{"Größenordnung > 200 kHz?"}
-    B -->|Nein| C{"Entwicklungszeit wichtiger als CPU-Effizienz?"}
-    B -->|Ja| D{"Größenordnung > 450 kHz?"}
-    D -->|Nein| E["ODR-XOR<br>445 kHz reichen"]
-    D -->|Ja| F["BSRR<br>1,6 MHz – F103 @ 8 MHz<br>10,3 MHz – F103 @ 72 MHz<br>25 MHz – F411 @ 100 MHz"]
-    C -->|Ja| G["HAL<br>schnell entwickelt, portabel"]
-    C -->|Nein| H{"Parallele Arbeit zwischen Flanken?"}
-    H -->|Ja| I["BSRR<br>8× mehr CPU-Headroom"]
-    H -->|Nein| J{"Race-Condition-Risiko – Interrupts / RTOS?"}
-    J -->|Ja| K["BSRR<br>kein ODR-RMW"]
-    J -->|Nein| L["ODR-XOR oder BSRR<br>nach Geschmack"]
+flowchart TD
+    n_start["GPIO Toggle"]
+    n_fast{"Mehr als 200 kHz"}
+    n_dev{"Entwicklungszeit wichtiger"}
+    n_very_fast{"Mehr als 450 kHz"}
+    n_odr["ODR XOR"]
+    n_bsrr_fast["BSRR"]
+    n_hal["HAL"]
+    n_work{"Arbeit zwischen Flanken"}
+    n_bsrr_headroom["BSRR"]
+    n_race{"Interrupts oder RTOS"}
+    n_bsrr_rmw["BSRR"]
+    n_choice["ODR XOR oder BSRR"]
+
+    n_start --> n_fast
+    n_fast -- Nein --> n_dev
+    n_fast -- Ja --> n_very_fast
+    n_very_fast -- Nein --> n_odr
+    n_very_fast -- Ja --> n_bsrr_fast
+    n_dev -- Ja --> n_hal
+    n_dev -- Nein --> n_work
+    n_work -- Ja --> n_bsrr_headroom
+    n_work -- Nein --> n_race
+    n_race -- Ja --> n_bsrr_rmw
+    n_race -- Nein --> n_choice
 ```
 
 Die Schwellen im Entscheidungsbaum orientieren sich an den Messwerten des F103 bei 8 MHz. Bei 72 MHz, auf dem F411 oder mit anderer Toolchain verschieben sich die Grenzen — die Tabelle darunter gibt die gemessenen Referenzpunkte.
