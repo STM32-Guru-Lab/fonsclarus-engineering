@@ -1,0 +1,11 @@
+{{- /* Render hook: code blocks — converts ```mermaid to <pre class="mermaid"> for Mermaid.js rendering */}}
+{{- if eq .Type "mermaid" }}
+  <pre class="mermaid">
+    {{- .Inner }}
+  </pre>
+{{- else }}
+  {{- /* Default rendering for all other languages */}}
+  <div class="code-block-wrapper">
+    <pre>{{ .Inner }}</pre>
+  </div>
+{{- end }}

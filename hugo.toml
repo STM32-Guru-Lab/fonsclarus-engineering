@@ -2,6 +2,9 @@ baseURL = 'https://stm32-guru-lab.github.io/fonsclarus-engineering/'
 title = 'FonsClarus Engineering'
 theme = 'fonsclarus'
 
+# Pagination for blog listing — 10 posts per page
+paginate = 10
+
 defaultContentLanguage = 'de'
 defaultContentLanguageInSubdir = false
 

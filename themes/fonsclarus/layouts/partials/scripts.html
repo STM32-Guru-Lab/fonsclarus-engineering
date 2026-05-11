@@ -64,6 +64,10 @@
   <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
 {{- end }}
 
+{{- /* Mermaid — diagram rendering */}}
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js" crossorigin="anonymous"
+  onload="mermaid.initialize({startOnLoad:true,theme:'default'});"></script>
+
 {{- /* KaTeX — LaTeX math rendering */}}
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"

@@ -1014,7 +1014,61 @@ details.post-toc summary {
 }
 
 /* --------------------------------------------------------------------------
-   20. Terms / Taxonomy Page
+    19a. Pagination
+    -------------------------------------------------------------------------- */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  font-size: 0.9375rem;
+}
+
+.pagination .page-item {
+  display: inline-flex;
+}
+
+.pagination .page-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-accent);
+  text-decoration: none;
+  background: var(--color-bg);
+}
+
+.pagination .page-link:hover {
+  background: var(--color-nav-hover);
+  text-decoration: none;
+  color: var(--color-accent-hover);
+}
+
+.pagination .active .page-link {
+  background: var(--color-accent);
+  color: #ffffff;
+  border-color: var(--color-accent);
+  font-weight: 600;
+  cursor: default;
+  pointer-events: none;
+}
+
+.pagination .disabled .page-link {
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+    20. Terms / Taxonomy Page
    -------------------------------------------------------------------------- */
 .terms-page {
   margin-bottom: 3rem;
@@ -1138,6 +1192,21 @@ details.post-toc summary {
 .glossary-term--missing {
   color: var(--color-text);
   text-decoration: underline wavy #cc4444;
+}
+
+/* --------------------------------------------------------------------------
+    21b. Mermaid Diagram Styles — Dark Mode aware
+    -------------------------------------------------------------------------- */
+
+.mermaid {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+  background: transparent;
 }
 
 /* --------------------------------------------------------------------------

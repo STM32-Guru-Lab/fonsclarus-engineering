@@ -148,4 +148,8 @@ Auf dieser Website finden Sie Links zu Repositorys und Profilen auf **GitHub**, 
 
 Zur Darstellung mathematischer Formeln wird die Bibliothek **KaTeX** über ein Content Delivery Network (CDN) von Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA, eingebunden. Dabei wird die IP-Adresse des Besuchers an den CDN-Anbieter übermittelt. Der Dienst dient ausschließlich der Bereitstellung von Schriftarten und Skripten; es erfolgt kein Tracking. Cloudflare ist nach dem „EU-US Data Privacy Framework" (DPF) zertifiziert. Weitere Informationen: [https://www.cloudflare.com/privacy](https://www.cloudflare.com/privacy)
 
+### Mermaid (CDN)
+
+Zur Darstellung von Diagrammen wird die Bibliothek **Mermaid** über ein Content Delivery Network (CDN) von Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA, eingebunden. Dabei wird die IP-Adresse des Besuchers an den CDN-Anbieter übermittelt. Der Dienst dient ausschließlich der Bereitstellung von Skripten zur clientseitigen Diagramm-Darstellung; es erfolgt kein Tracking. Cloudflare ist nach dem „EU-US Data Privacy Framework" (DPF) zertifiziert. Weitere Informationen: [https://www.cloudflare.com/privacy](https://www.cloudflare.com/privacy)
+
 Quelle: [https://www.e-recht24.de](https://www.e-recht24.de)

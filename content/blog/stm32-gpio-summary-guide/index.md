@@ -5,6 +5,7 @@ lastmod = 2026-05-11T00:00:00+02:00
 description = 'Entscheidungsmatrix für STM32-GPIO-Toggle: HAL, ODR-XOR oder BSRR? Mit Compiler-Einstellungen, Plattform-Wahl und Build-System-Entscheidungen. Alle Messwerte der 8-teiligen Benchmark-Serie auf einen Blick.'
 tags = ['stm32', 'gpio', 'hal', 'cmsis', 'performance', 'leitfaden', 'entscheidungsmatrix', 'embedded']
 draft = false
+mermaid = true
 +++
 
 Die GPIO-Toggle-Messreihe auf diesem Blog umfasst acht Artikel — vom [Vergleich HAL vs. CMSIS]({{< ref "/blog/stm32-hal-vs-cmsis-gpio-toggle" >}}) über [Compiler-Optimierungen]({{< ref "/blog/stm32-gpio-compiler-optimizations" >}}) und [LTO]({{< ref "/blog/stm32-gpio-lto-analysis" >}}) bis zum [Plattformvergleich F1 vs. F4]({{< ref "/blog/stm32-f1-vs-f4-gpio-toggle" >}}) und zur [FPU-Leistung]({{< ref "/blog/stm32-f1-vs-f4-fpu" >}}). Die Spannweite der Ergebnisse ist enorm: von **80 kHz** (HAL, `-O0`) bis **25,34 MHz** (BSRR, F411, `-O2`) — Faktor 317×. Dieser Faktor kombiniert allerdings mehrere Effekte gleichzeitig: Methode, Optimierung, Plattform und Takt. Zwischen 4 und 128 CPU-Zyklen pro vollständigem Toggle-Zyklus liegen Welten.
@@ -63,14 +64,14 @@ Die zentrale Frage dieses Leitfadens: **Welche der drei Methoden soll ich in mei
 ```mermaid
 graph TD
     A["GPIO-Toggle benötigt"] --> B{"Größenordnung > 200 kHz?"}
-    B -->|Nein| C{"Entwicklungszeit wichtiger<br>als CPU-Effizienz?"}
+    B -->|Nein| C{"Entwicklungszeit wichtiger als CPU-Effizienz?"}
     B -->|Ja| D{"Größenordnung > 450 kHz?"}
     D -->|Nein| E["ODR-XOR<br>445 kHz reichen"]
-    D -->|Ja| F["BSRR<br>1,6 MHz (F103 @ 8 MHz)<br>10,3 MHz (F103 @ 72 MHz)<br>25 MHz (F411 @ 100 MHz)"]
+    D -->|Ja| F["BSRR<br>1,6 MHz – F103 @ 8 MHz<br>10,3 MHz – F103 @ 72 MHz<br>25 MHz – F411 @ 100 MHz"]
     C -->|Ja| G["HAL<br>schnell entwickelt, portabel"]
-    C -->|Nein| H{"Parallele Arbeit<br>zwischen Flanken?"}
+    C -->|Nein| H{"Parallele Arbeit zwischen Flanken?"}
     H -->|Ja| I["BSRR<br>8× mehr CPU-Headroom"]
-    H -->|Nein| J{"Race-Condition-Risiko<br>(Interrupts / RTOS)?"}
+    H -->|Nein| J{"Race-Condition-Risiko – Interrupts / RTOS?"}
     J -->|Ja| K["BSRR<br>kein ODR-RMW"]
     J -->|Nein| L["ODR-XOR oder BSRR<br>nach Geschmack"]
 ```
