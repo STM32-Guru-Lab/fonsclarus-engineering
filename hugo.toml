@@ -86,10 +86,17 @@ defaultContentLanguageInSubdir = false
   [params.home]
     rss = 10
     [params.home.profile]
-      enable = false
+      enable = true
+      gravatarEmail = ''
+      avatarURL = '/images/avatar.png'
+      title = ''
+      subtitle = 'Embedded Systems, Firmware und Software Engineering'
+      typeit = true
+      social = true
+      disclaimer = ''
     [params.home.posts]
       enable = true
-      paginate = 5
+      paginate = 6
 
   # Page defaults
   [params.page]
